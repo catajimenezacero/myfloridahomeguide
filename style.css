@@ -1,0 +1,409 @@
+.header-bar {
+  position: relative;
+  width: 115vw;              /* pushes the line slightly past both sides */
+  height: 1px;
+  background: #e9e9e9;
+  left: -8vw;              /* recenters it visually */
+  margin: 0;
+  padding: 0;
+}
+.blog-header {
+  width: 100%;
+  padding: 1.1rem 4vw;
+  background: #ffffff;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  z-index: 10;
+}
+
+.blog-header-inner {
+  width: 100%;
+  max-width: 1500px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-logo {
+  height: 42px;
+  width: auto;
+  display: block;
+}
+
+/* Right side navigation links */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 400;
+}
+
+.nav-link,
+.nav-main {
+  text-decoration: none;
+  color: #333;
+  transition: opacity 0.25s ease;
+}
+
+.nav-link:hover,
+.nav-main:hover {
+  opacity: 0.6;
+}
+
+.nav-phone {
+  font-weight: 600;
+  color: #1e3352;
+}
+
+/* Optional dropdown hover effect */
+.nav-dropdown:hover .nav-main {
+  opacity: 0.6;
+}
+
+
+.header-bar::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  height: 16px;
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,0.12),
+    rgba(0,0,0,0.05) 45%,
+    rgba(0,0,0,0)
+  );
+  pointer-events: none;
+}
+
+:root {
+  --serif: 'Cormorant Garamond', serif;
+  --sans: 'Inter', sans-serif;
+}
+
+body {
+  font-family: var(--sans);
+  background: #fff;
+  color: #2a2a2a;
+  padding: 3rem 9vw;
+}
+
+/* Layout */
+.blog-layout {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+.feature-img {
+  width: 100%;
+  margin-bottom: 1.5rem;
+}
+
+.title {
+  font-family: var(--serif);
+  font-size: clamp(2rem, 3vw, 3rem);
+  margin-bottom: 2rem;
+  line-height: 1.15;
+}
+.hero-title {
+  margin-left: -3.5vw;
+  margin-top: 1rem;      /* space ABOVE the title */
+  margin-bottom: 1.8rem; /* space BELOW the title */
+}
+
+.hero-paragraph {
+  margin-left: -3.5vw;
+}
+
+.hero-image-wrap {
+  margin-left: -4vw;
+}
+
+.text {
+  line-height: 1.6;
+  margin-bottom: 1.25rem;
+}
+
+/* Side Column */
+.side-column {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem; /* airy spacing */
+}
+
+/* Cards */
+.card-img {
+  width: 100%;
+  border-radius: 22px; /* rounded rectangle shape */
+  margin-bottom: 1rem;
+}
+
+.card-title {
+  font-family: var(--serif);
+  font-size: 1.5rem;
+  margin-bottom: .5rem;
+}
+
+.card-text {
+  line-height: 1.55;
+  margin-bottom: .75rem;
+}
+
+.readmore {
+  text-decoration: none;
+  border-bottom: 1px solid #333;
+  color: #333;
+}
+
+@media(max-width: 900px) {
+  .blog-layout {
+    grid-template-columns: 1fr;
+  }
+  .blog-layout {
+  display: flex;
+  align-items: stretch;
+}
+
+}
+/* -------------------------------------
+   HERO SECTION (main feature article)
+-------------------------------------- */
+
+.hero-title {
+  font-family: var(--serif);
+  font-size: clamp(1.8rem, 3.2vw, 2.8rem);
+  line-height: 1.08;
+  margin-bottom: 2rem;
+}
+
+.hero-paragraph {
+  line-height: 1.6;
+  margin-top: 2rem;
+}
+
+/* ✅ Apply the silhouette shape ONLY to image wrapper */
+/* -------------------------------------
+   HERO IMAGE SHAPE
+-------------------------------------- */
+
+.hero-image-wrap {
+  width: 100%;
+  max-width: 1200px; /* you can scale this up or down later */
+  margin-top: 2rem;
+
+  /* ✅ Use your original shape as a mask */
+  -webkit-mask-image: url("https://assets.codepen.io/15642444/Hero.svg");
+  mask-image: url("https://assets.codepen.io/15642444/Hero.svg");
+
+  -webkit-mask-size: contain;
+  mask-size: contain;
+
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+
+  -webkit-mask-position: top left;
+  mask-position: top left;
+}
+
+.hero-image-wrap img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: center top; /* we will refine this after the shape returns */
+}
+
+
+/* Title + Paragraph stay the same */
+.hero-title {
+  font-family: var(--serif);
+  font-size: clamp(2.5rem, 3.5vw, 2.5rem);
+  line-height: 0.45;
+  margin-bottom: -6rem; /* keep or adjust spacing from image */
+}
+
+/* Ensure each line behaves like a block (independent) */
+.hero-title .line {
+  display: block;
+}
+
+/* Adjust each line independently */
+.hero-title .line-1 {
+  margin-left: 1rem;   /* adjust me */
+}
+
+.hero-title .line-2 {
+  margin-left: 1rem;  /* adjust me */
+}
+
+.hero-title .line-3 {
+  margin-left: 4rem;   /* adjust me */
+}
+.hero-paragraph {
+  line-height: 1.7;
+  margin-top: -3.8rem;
+  max-width: 30ch;
+  text-align: justify;        /* justify text */
+  text-justify: inter-word;
+ 
+}
+.breadcrumb {
+  font-family: var(--sans);
+  font-size: 0.95rem;
+  color: #999;
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.breadcrumb a {
+  color: #6fb1c6; /* your site’s soft teal */
+  text-decoration: none;
+}
+
+.breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+.breadcrumb span {
+  color: #999;
+}
+.breadcrumbs,
+.breadcrumb,
+.page-nav {
+  margin-top: 2rem;     /* move it down */
+}
+.blog-header {
+  background: #fff;
+  padding: 0.75rem 4vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: none;
+  position: relative;
+  z-index: 10;
+}
+
+.header-inner {
+  width: 100%;
+  max-width: 1400px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.exp-logo {
+  height: 45px;
+  width: auto;
+}
+
+.header-nav a {
+  margin-left: 2rem;
+  text-decoration: none;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  color: #333;
+  transition: color 0.2s ease;
+}
+
+.header-nav a:hover {
+  color: #0077b6; /* soft blue hover */
+}
+
+/* ✅ keeps your subtle shadow line */
+.header-bar {
+  position: relative;
+  width: 100vw;     /* full viewport width */
+  left: 50%;
+  transform: translateX(-50%);   /* centers it perfectly */
+  height: 1px;
+  background: #e9e9e9;
+  margin: 0;
+  padding: 0;
+}
+
+
+.header-bar::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  height: 16px;
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,0.12),
+    rgba(0,0,0,0.05) 45%,
+    rgba(0,0,0,0)
+  );
+  pointer-events: none;
+}
+/* ================================
+   MAIN FOOTER LAYOUT (4 columns)
+   ================================ */
+
+.site-footer {
+  width: 100%;
+  background: #fff;
+  padding: 2rem 0;
+  border-top: 1px solid #e5e5e5;
+
+  display: flex;
+  justify-content: center;
+}
+
+.footer-inner {
+  width: 100%;
+  max-width: 2400px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.1rem;
+}
+
+.footer-links a {
+  color: #333;
+  text-decoration: none;
+  font-size: 1.4rem;
+}
+
+.footer-logo {
+  height: 38px;
+  width: auto;
+}
+
+.footer-copy {
+  font-size: 0.85rem;
+  color: #444;
+}
+.site-footer {
+  padding: 2rem 4vw;
+  border-top: 1px solid #e5e5e5;
+  padding-left: 0vw;
+  padding-right: 0vw;
+  grid-column: 1 / -1;
+}
+.blog-layout {
+  background: #fff;       /* unify background */
+  position: relative;     /* stabilize flow */
+  padding-bottom: 3rem;   /* create room before footer */
+}
+.hero-container,
+.side-column {
+  background: #fff;
+}
+.full-width-line {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
