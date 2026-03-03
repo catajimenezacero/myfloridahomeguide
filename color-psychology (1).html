@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Psychology of Color in Home Design</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        body {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Space Grotesk', sans-serif;
+            background: #fafafa;
+            min-height: 100%;
+            color: #1a1a1a;
+        }
+
+        .hero-section {
+            background: #ffffff;
+            color: #1a1a1a;
+            padding: 120px 20px 80px;
+            text-align: left;
+            position: relative;
+            border-bottom: 1px solid #e5e5e5;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .hero-text {
+            padding-right: 40px;
+        }
+
+        .hero-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 4.5rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+            line-height: 0.9;
+            letter-spacing: -0.02em;
+            color: #1a1a1a;
+        }
+
+        .hero-subtitle {
+            font-family: 'Crimson Text', serif;
+            font-size: 1.4rem;
+            line-height: 1.6;
+            color: #666;
+            margin-bottom: 40px;
+        }
+
+        .hero-meta {
+            display: flex;
+            gap: 30px;
+            font-size: 0.9rem;
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 80px 20px;
+        }
+
+        .hero-image {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            border-radius: 0;
+            margin: 0;
+        }
+
+        .article-image {
+            width: 100%;
+            height: 600px;
+            object-fit: cover;
+            border-radius: 0;
+            margin: 80px 0;
+            display: block;
+            transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                        box-shadow 0.3s ease;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+            -webkit-user-drag: none;
+            user-select: none;
+        }
+
+        .article-image:hover {
+            transform: scale(1.035);
+            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.18);
+            cursor: pointer;
+        }
+
+        .intro-text {
+            font-family: 'Crimson Text', serif;
+            font-size: 1.5rem;
+            line-height: 1.7;
+            color: #333;
+            margin: 80px 0;
+            max-width: 800px;
+            font-style: italic;
+        }
+
+        .colors-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2px;
+            margin: 80px 0;
+            background: #e5e5e5;
+        }
+
+        .color-section {
+            background: white;
+            padding: 60px 40px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .color-section:hover {
+            background: #f8f8f8;
+        }
+
+        .color-number {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #999;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .color-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #1a1a1a;
+            line-height: 1.2;
+        }
+
+        .color-text {
+            font-family: 'Crimson Text', serif;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #666;
+        }
+
+        .color-accent {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+        }
+
+        .blue .color-accent { background: #2563eb; }
+        .yellow .color-accent { background: #eab308; }
+        .green .color-accent { background: #16a34a; }
+        .pink .color-accent { background: #ec4899; }
+        .red .color-accent { background: #dc2626; }
+        .neutral .color-accent { background: #6b7280; }
+        .monochrome .color-accent { background: #1f2937; }
+
+        .tips-section {
+            background: #1a1a1a;
+            color: white;
+            padding: 100px 0;
+            margin: 80px 0;
+        }
+
+        .tips-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .tips-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 60px;
+            text-align: center;
+            line-height: 1.1;
+        }
+
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2px;
+            background: #333;
+        }
+
+        .tip-card {
+            background: #1a1a1a;
+            padding: 40px;
+            transition: background 0.3s ease;
+            border: none;
+        }
+
+        .tip-card:hover {
+            background: #2a2a2a;
+        }
+
+        .tip-number {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #666;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .tip-card h4 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #fff;
+            line-height: 1.2;
+        }
+
+        .tip-card p {
+            font-family: 'Crimson Text', serif;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin: 0;
+            color: #ccc;
+        }
+
+        .cta-section {
+            text-align: center;
+            padding: 100px 40px;
+            background: white;
+            margin: 80px 0;
+            border-top: 1px solid #e5e5e5;
+            border-bottom: 1px solid #e5e5e5;
+        }
+
+        .cta-text {
+            font-family: 'Crimson Text', serif;
+            font-size: 1.3rem;
+            font-weight: 400;
+            color: #666;
+            line-height: 1.6;
+            max-width: 600px;
+            margin: 0 auto;
+            font-style: italic;
+        }
+
+        @media (max-width: 768px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                text-align: center;
+            }
+
+            .hero-text {
+                padding-right: 0;
+            }
+
+            .hero-title {
+                font-size: 3rem;
+            }
+
+            .container {
+                padding: 40px 15px;
+            }
+
+            .colors-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .color-section {
+                padding: 40px 30px;
+            }
+
+            .tips-section {
+                padding: 60px 0;
+            }
+
+            .tips-container {
+                padding: 0 15px;
+            }
+
+            .tips-title {
+                font-size: 2.2rem;
+            }
+
+            .tips-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-text {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- SITE HEADER -->
+    <header style="width:100%;padding:1.1rem 4vw;background:#fff;display:flex;justify-content:center;position:relative;z-index:10;">
+      <div style="width:100%;max-width:1500px;display:flex;justify-content:space-between;align-items:center;">
+        <div>
+          <img src="https://imgur.com/5rAwWDG.jpeg" alt="eXp Realty Logo" style="height:42px;width:auto;display:block;max-width:120px;object-fit:contain;">
+        </div>
+        <nav style="display:flex;align-items:center;gap:2rem;font-family:'Space Grotesk',sans-serif;font-size:0.95rem;">
+          <a href="#" style="text-decoration:none;color:#333;">Search</a>
+          <a href="#" style="text-decoration:none;color:#333;">Sell</a>
+          <a href="#" style="text-decoration:none;color:#333;">Communities</a>
+          <a href="#" style="text-decoration:none;color:#333;">Other ▾</a>
+          <a href="#" style="text-decoration:none;color:#333;">Resources ▾</a>
+        </nav>
+      </div>
+    </header>
+    <div style="width:100%;height:1px;background:#e9e9e9;"></div>
+    <header class="hero-section">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1 class="hero-title">The Psychology of Color</h1>
+                <p class="hero-subtitle">Designing a Home That Feels Just Right</p>
+                <div class="hero-meta">
+                    <span>Interior Design</span>
+                    <span>Psychology</span>
+                    <span>5 Min Read</span>
+                </div>
+                </div>
+          <div class="hero-image-container">
+  <a 
+    href="https://www.etsy.com/listing/1857109530/pink-psychedelic-area-rug-abstract?ls=a&ga_order=most_relevant&ga_search_type=all&ga_view_type=gallery&ga_search_query=large+bedroom+print&ref=sc_gallery-1-1&sr_prefetch=0&pro=1&frs=1&nob=1&plkey=ccc4bc35c949ec188d7331a6f55f1ee89d39c75a%3A1857109530&epik=dj0yJnU9T1RISUg5X1NKVTlGOEc3SElfdU9kUGx5ZjBnRUxwa1EmcD0wJm49TGMxdnFoZGpXMUMwM1ZxLUFFV3E5USZ0PUFBQUFBR2oyY1VN"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="View Pink Psychedelic Area Rug on Etsy"
+  >
+    <img 
+      src="https://i.imgur.com/5TfB9c0.jpeg" 
+      alt="Pink Psychedelic Area Rug – Abstract design"
+      class="hero-image"
+      draggable="false"
+    />
+  </a>
+</div>
+
+    </header>
+
+    <main class="container">
+        <div class="intro-text">
+            Color doesn't just change how your home looks — it transforms how it <em>feels</em>. Whether you're seeking calm, creativity, energy, or elegance, understanding color psychology helps you create spaces that truly support your lifestyle and mood.
+        </div>
+
+        <div class="colors-grid">
+            <section class="color-section blue">
+                <div class="color-accent"></div>
+                <div class="color-number">01</div>
+                <h3 class="color-title">Blue: Calm, Focus, and Serenity</h3>
+                <p class="color-text">Ideal for bedrooms, offices, or bathrooms, <strong>blue</strong> tones are known to lower heart rate and blood pressure. Use light blues for a spa-like feel, or deeper navy for richness and sophistication.</p>
+            </section>
+
+            <section class="color-section yellow">
+                <div class="color-accent"></div>
+                <div class="color-number">02</div>
+                <h3 class="color-title">Yellow: Energy, Optimism, and Joy</h3>
+                <p class="color-text"><strong>Yellow</strong> is cheerful and uplifting — perfect for kitchens, breakfast nooks, or small entryways. Use it in moderation: soft buttery yellows feel cozy, while bold sunshine tones can get overwhelming if overused.</p>
+            </section>
+
+            <section class="color-section green">
+                <div class="color-accent"></div>
+                <div class="color-number">03</div>
+                <h3 class="color-title">Green: Balance, Growth, and Harmony</h3>
+                <p class="color-text">A versatile choice for almost any room, <strong>green</strong> represents nature and renewal. Sage greens are soothing in bedrooms or bathrooms, while deeper forest greens create a grounding effect in living rooms.</p>
+            </section>
+
+            <section class="color-section pink">
+                <div class="color-accent"></div>
+                <div class="color-number">04</div>
+                <h3 class="color-title">Pink: Comfort, Playfulness, and Romance</h3>
+                <p class="color-text">From soft blush to bold magenta, <strong>pink</strong> adds personality. Pale pink creates a calming ambiance, while brighter tones add bold character to creative spaces or fun guest rooms.</p>
+            </section>
+
+            <section class="color-section red">
+                <div class="color-accent"></div>
+                <div class="color-number">05</div>
+                <h3 class="color-title">Red: Passion, Warmth, and Energy</h3>
+                <p class="color-text"><strong>Red</strong> increases heart rate and energy — great for dining rooms or entertaining spaces where lively conversation is key. Deep burgundy adds elegance, while bright reds make a strong statement.</p>
+            </section>
+
+            <section class="color-section neutral">
+                <div class="color-accent"></div>
+                <div class="color-number">06</div>
+                <h3 class="color-title">Neutrals: Simplicity, Versatility, and Calm</h3>
+                <p class="color-text"><strong>Beige, ivory, taupe, and grey</strong> act as foundations for layering. They're ideal for open spaces, letting furniture or art take the spotlight. Mix warm and cool tones for depth and interest.</p>
+            </section>
+
+            <section class="color-section monochrome">
+                <div class="color-accent"></div>
+                <div class="color-number">07</div>
+                <h3 class="color-title">Black & White: Bold Contrast and Timeless Elegance</h3>
+                <p class="color-text">Use <strong>black</strong> to ground a room and add drama; use <strong>white</strong> for cleanliness and airiness. Together, they create crisp contrast and a classic, modern feel.</p>
+            </section>
+        </div>
+            <section class="color-section monochrome">
+                
+
+        <!-- Etsy rug image -->
+        <img
+  src="https://i.imgur.com/evrwbdu.jpeg"
+  alt="Interior styled rug in modern living room"
+  class="article-image"
+/>        
+        </ahref>
+    </main>
+
+    <section class="tips-section">
+        <div class="tips-container">
+            <h3 class="tips-title">How to Apply Color Psychology in Your Home</h3>
+            <div class="tips-grid">
+                <div class="tip-card"><div class="tip-number">Step 01</div><h4>Start with emotion</h4><p>Ask yourself how you want to feel in each space — energized, relaxed, inspired?</p></div>
+                <div class="tip-card"><div class="tip-number">Step 02</div><h4>Balance bold and subtle</h4><p>Use vibrant colors as accents (pillows, rugs, art), and neutrals for balance.</p></div>
+                <div class="tip-card"><div class="tip-number">Step 03</div><h4>Test before you commit</h4><p>Paint swatches on your wall and see them in natural light throughout the day.</p></div>
+                <div class="tip-card"><div class="tip-number">Step 04</div><h4>Let your personality shine</h4><p>Color is deeply personal — trust your gut and don't be afraid to break rules.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <p class="cta-text">Design your home with intention — color is more than just style. It's energy. It's mood. It's you.</p>
+    </section>
+    <!-- SITE FOOTER -->
+    <footer style="width:100%;background:#fff;padding:2rem 0;border-top:1px solid #e5e5e5;display:flex;justify-content:center;">
+      <div style="width:100%;max-width:2400px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:0.5rem;">
+        <div>
+          <a href="#" style="color:#333;text-decoration:none;font-size:0.9rem;">Accessibility</a> |
+          <a href="#" style="color:#333;text-decoration:none;font-size:0.9rem;">Terms of Service</a> |
+          <a href="#" style="color:#333;text-decoration:none;font-size:0.9rem;">Privacy Policy</a> |
+          <a href="#" style="color:#333;text-decoration:none;font-size:0.9rem;">DMCA Notice</a> |
+          <a href="#" style="color:#333;text-decoration:none;font-size:0.9rem;">Sitemap</a>
+        </div>
+        <div>
+          <img src="https://imgur.com/uwPw7OD.jpeg" alt="Equal Housing Opportunity" style="height:38px;width:auto;">
+        </div>
+        <div style="font-size:0.85rem;color:#444;">© 2025 Catalina Jimenez · eXp Realty · All Rights Reserved</div>
+      </div>
+    </footer>
+</body>
+</html>

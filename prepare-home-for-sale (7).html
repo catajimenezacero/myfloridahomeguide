@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How to Prepare Your Home for Sale | My Florida Home Guide</title>
+  <meta name="description" content="Essential steps to get your Florida home market-ready, attract buyers, and get top dollar.">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --ink: #111;
+      --muted: #888;
+      --rule: #e4e4e4;
+      --bg: #fff;
+      --display: 'DM Serif Display', serif;
+      --sans: 'DM Sans', sans-serif;
+    }
+    body { background: var(--bg); color: var(--ink); font-family: var(--sans); font-size: 15px; line-height: 1.7; }
+
+    /* HEADER */
+    .site-header { width:100%; padding:1.1rem 4vw; background:#fff; display:flex; justify-content:center; border-bottom:1px solid var(--rule); }
+    .site-header-inner { width:100%; max-width:1500px; display:flex; justify-content:space-between; align-items:center; }
+    .header-logo { height:42px; width:auto; display:block; max-width:120px; object-fit:contain; }
+    .header-nav { display:flex; align-items:center; gap:2rem; font-family:var(--sans); font-size:0.88rem; }
+    .header-nav a { text-decoration:none; color:#333; }
+    .header-nav a:hover { color:#000; }
+
+    /* ARTICLE WRAPPER */
+    .article-wrap { max-width: 740px; margin: 0 auto; padding: 0 2rem; }
+
+    /* META ROW */
+    .meta-row {
+      display: flex;
+      gap: 4rem;
+      padding: 2.5rem 0 2rem;
+      border-bottom: 1px solid var(--rule);
+      margin-bottom: 2.5rem;
+    }
+    .meta-item label {
+      display: block;
+      font-family: var(--sans);
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.3rem;
+    }
+    .meta-item span {
+      font-family: var(--sans);
+      font-size: 0.85rem;
+      color: var(--ink);
+      font-weight: 400;
+    }
+
+    /* TITLE */
+    .article-title {
+      font-family: var(--display);
+      font-size: clamp(2.2rem, 4.5vw, 3.2rem);
+      font-weight: 400;
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+      margin-bottom: 1.2rem;
+    }
+    .article-intro {
+      font-family: var(--sans);
+      font-size: 0.95rem;
+      line-height: 1.75;
+      color: #555;
+      margin-bottom: 2rem;
+      max-width: 580px;
+    }
+
+    /* HERO IMAGE */
+    .hero-img-wrap {
+      max-width: 500px;
+      margin: 0 auto 3rem;
+      padding: 0 2rem;
+    }
+    .hero-img-wrap img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      display: block;
+      border-radius: 8px;
+    }
+
+    /* BODY WITH SOCIAL SIDEBAR */
+    .body-wrap {
+      max-width: 740px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: grid;
+      grid-template-columns: 40px 1fr;
+      gap: 2.5rem;
+    }
+    .social-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.2rem;
+      padding-top: 0.3rem;
+    }
+    .social-icon {
+      width: 28px; height: 28px;
+      display: flex; align-items: center; justify-content: center;
+      color: #bbb;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+    .social-icon:hover { color: #333; }
+    .social-icon svg { width: 16px; height: 16px; fill: currentColor; }
+
+    .content-col p {
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: #333;
+      margin-bottom: 1.5rem;
+      font-weight: 300;
+    }
+    .content-col h2 {
+      font-family: var(--display);
+      font-size: 1.5rem;
+      font-weight: 400;
+      margin: 2.5rem 0 0.75rem;
+      line-height: 1.2;
+    }
+    .content-col h3 {
+      font-family: var(--sans);
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 2.5rem 0 0.5rem;
+    }
+
+    /* MID IMAGE */
+    .mid-img-wrap {
+      max-width: 740px;
+      margin: 2rem auto;
+      padding: 0 2rem;
+    }
+    .mid-img-wrap img {
+      width: 100%;
+      height: 360px;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* CONCLUSION */
+    .conclusion {
+      max-width: 740px;
+      margin: 3rem auto 4rem;
+      padding: 2rem;
+      border: 1px solid var(--rule);
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 2rem;
+      align-items: start;
+    }
+    .conclusion-label {
+      font-family: var(--sans);
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding-top: 0.2rem;
+    }
+    .conclusion-text {
+      font-family: var(--sans);
+      font-size: 0.9rem;
+      line-height: 1.7;
+      color: #444;
+      font-style: italic;
+    }
+
+    /* READ NEXT */
+    .read-next {
+      max-width: 740px;
+      margin: 0 auto 4rem;
+      padding: 0 2rem;
+      border-top: 1px solid var(--rule);
+      padding-top: 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .read-next span { font-size:0.75rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted); }
+    .read-next a { font-family:var(--display); font-size:1.1rem; color:var(--ink); text-decoration:none; }
+    .read-next a:hover { text-decoration:underline; }
+
+    /* FOOTER */
+    .site-footer { width:100%; background:#fff; padding:2rem 0; border-top:1px solid #e5e5e5; display:flex; justify-content:center; }
+    .footer-inner { width:100%; max-width:2400px; display:flex; flex-direction:column; align-items:center; text-align:center; gap:0.5rem; }
+    .footer-inner a { color:#333; text-decoration:none; font-size:0.9rem; }
+    .footer-logo { height:38px; width:auto; }
+    .footer-copy { font-size:0.85rem; color:#444; }
+
+    @media(max-width:600px) {
+      .body-wrap { grid-template-columns: 1fr; }
+      .social-col { flex-direction: row; padding-top: 0; }
+      .conclusion { grid-template-columns: 1fr; }
+      .hero-img-wrap img { height:260px; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header-inner">
+    <img src="https://imgur.com/5rAwWDG.jpeg" alt="eXp Realty Logo" class="header-logo">
+    <nav class="header-nav">
+      <a href="#">Search</a><a href="#">Sell</a><a href="#">Communities</a><a href="#">Other ▾</a><a href="#">Resources ▾</a>
+    </nav>
+  </div>
+</header>
+
+<div class="article-wrap">
+  <div class="meta-row">
+    <div class="meta-item"><label>Category</label><span>Selling</span></div>
+    <div class="meta-item"><label>Topic</label><span>Home Prep Tips</span></div>
+    <div class="meta-item"><label>Reading Time</label><span>6 Min</span></div>
+  </div>
+  <h1 class="article-title">How to Prepare Your Home for Sale</h1>
+  <p class="article-intro">Selling your home can be both exciting and stressful. Preparing your property to show it in the best possible light is crucial to attract buyers and get top dollar. Here are the essential steps to get market-ready.</p>
+</div>
+
+<div class="hero-img-wrap">
+  <img src="https://i.imgur.com/AZjeDnA.jpg" alt="A beautifully staged home ready for sale">
+</div>
+
+<div class="body-wrap">
+  <div class="social-col">
+    <div class="social-icon">
+      <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+    </div>
+    <div class="social-icon">
+      <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+    </div>
+    <div class="social-icon">
+      <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+    </div>
+  </div>
+
+  <div class="content-col">
+    <h3>Declutter & Depersonalize</h3>
+    <h2>Let Buyers Picture Themselves at Home</h2>
+    <p>Buyers want to imagine themselves living in your home. Remove personal photos, excessive decorations, and clutter from all rooms, closets, and storage spaces. A clean, neutral environment allows potential buyers to visualize their own belongings in the space.</p>
+
+    <h3>Deep Clean Everything</h3>
+    <h2>A Spotless Home Signals a Well-Cared-For Property</h2>
+    <p>A spotless home gives the impression that the property has been well cared for. Clean carpets, scrub floors, wash windows inside and out, dust light fixtures and fans, and sanitize bathrooms and kitchens. Consider hiring professional cleaners for a thorough job.</p>
+
+    <h3>Minor Repairs</h3>
+    <h2>Don't Let Small Issues Become Deal Breakers</h2>
+    <p>Fix leaky faucets, squeaky doors, chipped paint, cracked tiles, and any other small issues. These minor fixes prevent buyers from seeing your home as a "project" and reassure them that the property is move-in ready.</p>
+
+    <h3>Curb Appeal</h3>
+    <h2>First Impressions Happen Before They Walk Through the Door</h2>
+    <p>Make sure your lawn is mowed, bushes trimmed, and flower beds weeded. Consider adding potted plants or fresh mulch for a polished look. Repaint or clean the front door and make sure the entryway is warm and inviting.</p>
+  </div>
+</div>
+
+<div class="mid-img-wrap">
+  <img src="https://i.imgur.com/GQZ0uy0.jpg" alt="Decluttering boxes keep donate trash">
+</div>
+
+<div class="body-wrap">
+  <div class="social-col"></div>
+  <div class="content-col">
+    <h3>Paint Colors</h3>
+    <h2>Neutral Colors Appeal to a Broader Audience</h2>
+    <p>If your walls are painted in bold or personalized colors, consider repainting them with neutral shades like soft beige, gray, or white. Neutral colors help rooms appear brighter, more spacious, and easier for buyers to picture their own style in.</p>
+
+    <h3>Staging</h3>
+    <h2>Furniture Placement Can Transform a Space</h2>
+    <p>Arrange furniture to showcase your home's best features and maximize the use of space. Remove bulky or unnecessary pieces and add tasteful decor accents like throw pillows or fresh flowers. If needed, hire a professional stager for expert advice.</p>
+
+    <h3>Photography</h3>
+    <h2>Your Listing Photos Are Your First Showing</h2>
+    <p>Most buyers start their home search online, so great photos are essential. Use a professional photographer or high-quality camera in natural light. Highlight key rooms like the living room, kitchen, and master bedroom.</p>
+  </div>
+</div>
+
+<div class="conclusion">
+  <div class="conclusion-label">Conclusion</div>
+  <div class="conclusion-text">Preparing your home for sale requires time and effort, but it pays off in attracting serious buyers and securing the best price. If you need expert guidance tailored to your property, I'm here to help you every step of the way.</div>
+</div>
+
+<div class="mid-img-wrap"><img src="https://i.imgur.com/qJt49Ta.jpg" alt="Clean organized walk-in closet"></div>
+
+<div class="read-next">
+  <span>Continue Reading</span>
+  <a href="usda-loans-ocala.html">USDA Loans in Ocala: Zero Down Options →</a>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div><a href="#">Accessibility</a> | <a href="#">Terms of Service</a> | <a href="#">Privacy Policy</a> | <a href="#">DMCA Notice</a> | <a href="#">Sitemap</a></div>
+    <div><img src="https://imgur.com/uwPw7OD.jpeg" alt="Equal Housing Opportunity" class="footer-logo"></div>
+    <div class="footer-copy">© 2025 Catalina Jimenez · eXp Realty · All Rights Reserved</div>
+  </div>
+</footer>
+
+</body>
+</html>
