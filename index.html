@@ -5,7 +5,7 @@
   <title>My Florida Home Guide</title>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-  <style>
+ <style>
     :root { --serif: 'Cormorant Garamond', serif; --sans: 'Inter', sans-serif; }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { font-family: var(--sans); background: #fff; color: #2a2a2a; padding: 3rem 9vw; }
@@ -27,8 +27,8 @@
     .hero-title .line-1 { margin-left: 1rem; }
     .hero-title .line-2 { margin-left: 1rem; }
     .hero-title .line-3 { margin-left: 4rem; }
-    .hero-image-wrap { width: 100%; max-width: 1200px; margin-left: -4vw; margin-top: 2rem; -webkit-mask-image: url("https://assets.codepen.io/15642444/Hero.svg"); mask-image: url("https://assets.codepen.io/15642444/Hero.svg"); -webkit-mask-size: contain; mask-size: contain; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-position: top left; mask-position: top left; }
     .hero-image-wrap { width: 100%; max-width: 1200px; margin-left: -4vw; margin-top: 2rem; margin-bottom: -4rem; -webkit-mask-image: url("https://assets.codepen.io/15642444/Hero.svg"); mask-image: url("https://assets.codepen.io/15642444/Hero.svg"); -webkit-mask-size: contain; mask-size: contain; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-position: top left; mask-position: top left; }
+    .hero-image-wrap img { width: 100%; height: 100%; display: block; object-fit: cover; object-position: center top; }
     .hero-paragraph { font-family: var(--sans); line-height: 1.7; margin-left: -3.5vw; margin-top: 1rem; max-width: 28ch; text-align: justify; text-justify: inter-word; }
     .readmore { text-decoration: none; border-bottom: 1px solid #333; color: #333; }
     .side-column { display: flex; flex-direction: column; gap: 3rem; background: #fff; }
@@ -41,8 +41,8 @@
     .footer-logo { height: 38px; width: auto; }
     .footer-copy { font-size: 0.85rem; color: #444; }
     a.card-link, a.card-link:link, a.card-link:visited, a.card-link:hover, a.card-link:active { color: #2a2a2a !important; text-decoration: none !important; display: block; cursor: pointer; }
-.card-link h2, .card-link h3, .card-link p, .card-link span { color: #2a2a2a !important; text-decoration: none !important; }
-.card-link:hover .hero-image-wrap img, .card-link:hover .card-img { opacity: 0.85; transition: opacity 0.25s; }
+    .card-link h2, .card-link h3, .card-link p, .card-link span { color: #2a2a2a !important; text-decoration: none !important; }
+    .card-link:hover .hero-image-wrap img, .card-link:hover .card-img { opacity: 0.85; transition: opacity 0.25s; }
     @media(max-width: 900px) { .blog-layout { grid-template-columns: 1fr; } }
   </style>
 </head>
