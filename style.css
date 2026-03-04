@@ -247,11 +247,11 @@ body {
 }
 .hero-paragraph {
   line-height: 1.7;
-  margin-top: 2rem;
-  max-width: 30ch;
-  text-align: justify;        /* justify text */
+  margin-top: -3.8rem;
+  margin-left: 0;
+  max-width: 20ch;
+  text-align: justify;
   text-justify: inter-word;
- 
 }
 .breadcrumb {
   font-family: var(--sans);
