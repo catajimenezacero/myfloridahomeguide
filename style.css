@@ -413,6 +413,10 @@ body {
   display: block;
   cursor: pointer;
 }
+.card-link * {
+  text-decoration: none;
+  color: inherit;
+}
 .card-link:hover .hero-image-wrap img,
 .card-link:hover .card-img {
   opacity: 0.85;
