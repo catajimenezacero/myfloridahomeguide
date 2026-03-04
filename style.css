@@ -407,16 +407,9 @@ body {
   left: 50%;
   transform: translateX(-50%);
 }
-.card-link {
-  text-decoration: none;
-  color: inherit;
-  display: block;
-  cursor: pointer;
-}
-.card-link * {
-  text-decoration: none;
-  color: inherit;
-}
+.card-link { text-decoration: none; color: inherit; display: block; cursor: pointer; }
+.card-link h2, .card-link h3, .card-link p, .card-link span { text-decoration: none; color: inherit; }
+a.card-link:visited, a.card-link:link { color: inherit; text-decoration: none; }
 .card-link:hover .hero-image-wrap img,
 .card-link:hover .card-img {
   opacity: 0.85;
