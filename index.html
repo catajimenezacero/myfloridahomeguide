@@ -1,3 +1,6 @@
+Index · HTML
+Copy
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -40,6 +43,10 @@
     .footer-inner a { color: #333; text-decoration: none; font-size: 0.9rem; }
     .footer-logo { height: 38px; width: auto; }
     .footer-copy { font-size: 0.85rem; color: #444; }
+    .card-link { text-decoration: none !important; color: inherit !important; display: block; cursor: pointer; }
+    .card-link:link, .card-link:visited, .card-link:hover, .card-link:active { text-decoration: none !important; color: inherit !important; }
+    .card-link h2, .card-link h3, .card-link p, .card-link span { text-decoration: none !important; color: inherit !important; }
+    .card-link:hover .hero-image-wrap img, .card-link:hover .card-img { opacity: 0.85; transition: opacity 0.25s; }
     @media(max-width: 900px) { .blog-layout { grid-template-columns: 1fr; } }
   </style>
 </head>
@@ -89,47 +96,47 @@
 
   <!-- LEFT FEATURE BLOCK -->
   <div class="hero-container">
-
-  <h2 class="hero-title">
-  <span class="line line-1">The Psychology of</span><br>
-  <span class="line line-2">Color in Home</span><br>
-  <span class="line line-3">Design</span>
-</h2>
-
-
-<div class="hero-image-wrap">
-  <img src="https://assets.codepen.io/15642444/Screenshot%202025-10-20%20at%201.41.31%E2%80%AFPM.png" alt="">
-</div>
-  <p class="hero-paragraph">
-    Colors shape emotion, memory, and how we experience a space before we even
-    have the words for it. In home design, intentional color choices can make a
-    room feel calm, grounded, or light-filled, guiding how potential buyers
-    imagine themselves living there.
-    </p>
-      <a href="color-psychology.html" class="readmore"> Read More →</a>
-
-</div>
+    <a href="color-psychology.html" class="card-link">
+      <h2 class="hero-title">
+        <span class="line line-1">The Psychology of</span><br>
+        <span class="line line-2">Color in Home</span><br>
+        <span class="line line-3">Design</span>
+      </h2>
+      <div class="hero-image-wrap">
+        <img src="https://assets.codepen.io/15642444/Screenshot%202025-10-20%20at%201.41.31%E2%80%AFPM.png" alt="">
+      </div>
+      <p class="hero-paragraph">
+        Colors shape emotion, memory, and how we experience a space before we even
+        have the words for it. In home design, intentional color choices can make a
+        room feel calm, grounded, or light-filled, guiding how potential buyers
+        imagine themselves living there.
+      </p>
+      <span class="readmore">Read More →</span>
+    </a>
+  </div>
 
   <!-- RIGHT SMALL CARDS COLUMN -->
   <div class="side-column">
 
     <div class="card">
-      <a href="prepare-home-for-sale.html" class="card-link">
-        <img src="https://i.imgur.com/AZjeDnA.jpg" alt="" class="card-img">
-        <h3 class="card-title">How to Prepare Your Home for Sale</h3>
-        <p class="card-text">A thoughtful approach to decluttering, styling, and emotionally transitioning your home — not just tidying it.</p>
-        <span class="readmore">Read More →</span>
-      </a>
+      <img src="https://i.imgur.com/AZjeDnA.jpg" alt="" class="card-img">
+      <h3 class="card-title">How to Prepare Your Home for Sale</h3>
+      <p class="card-text">
+        A thoughtful approach to decluttering, styling, and emotionally transitioning your home — not just tidying it.
+      </p>
+      <a href="prepare-home-for-sale.html" class="readmore">Read More →</a>
     </div>
 
     <div class="card">
-      <a href="usda-loans-ocala.html" class="card-link">
-        <h3 class="card-title">USDA Loans in Ocala: Zero Down Options</h3>
-        <img src="https://i.imgur.com/o5Bh1wB.jpeg" alt="" class="card-img">
-        <p class="card-text">Ocala is USDA-loan eligible — offering zero down payment financing and an accessible path to homeownership.</p>
-        <span class="readmore">Read More →</span>
-      </a>
-    </div>
+  <h3 class="card-title">USDA Loans in Ocala: Zero Down Options</h3>
+
+  <img src="https://i.imgur.com/o5Bh1wB.jpeg" alt="" class="card-img">
+
+  <p class="card-text">
+    Ocala is USDA-loan eligible — offering zero down payment financing and an accessible path to homeownership.
+  </p>
+      <a href="usda-loans-ocala.html" class="readmore">Read More →</a>
+</div>
 </div> <!-- closes .side-column -->
   </div> <!-- closes .blog-layout -->
 
