@@ -2,86 +2,262 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My Florida Home Guide</title>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <!-- Updated this link to specifically request the 700 and 600 weights -->
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    :root { --serif: "Cormorant Garamond", serif; --sans: "Inter", sans-serif; }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: var(--sans); background: #fff; color: #2a2a2a; padding: 3rem 9vw; }
+    :root { 
+      --serif: "Cormorant Garamond", serif; 
+      --sans: "Inter", sans-serif; 
+    }
+    
+    * { 
+      box-sizing: border-box; 
+      margin: 0; 
+      padding: 0; 
+    }
+    
+    body { 
+      font-family: var(--sans); 
+      background: #fff; 
+      color: #2a2a2a; 
+    }
+
+    /* Outer wrapper to control max width perfectly */
+    .page-wrapper {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 0 5vw;
+    }
 
     /* HEADER */
-    .blog-header { width: 100%; padding: 1.1rem 4vw; background: #fff; display: flex; justify-content: center; position: relative; z-index: 10; }
-    .blog-header-inner { width: 100%; max-width: 1500px; display: flex; justify-content: space-between; align-items: center; }
-    .header-logo { height: 42px; width: auto; display: block; }
-    .header-right { display: flex; align-items: center; gap: 2rem; font-family: var(--sans); font-size: 0.95rem; font-weight: 400; }
-    .nav-main { text-decoration: none; color: #333; transition: opacity 0.25s ease; }
-    .nav-main:hover { opacity: 0.6; }
+    .blog-header { 
+      width: 100%; 
+      padding: 1.25rem 0; 
+      background: #fff; 
+      display: flex; 
+      justify-content: space-between; 
+      align-items: center; 
+    }
+    .header-logo { 
+      height: 42px; 
+      width: auto; 
+      display: block; 
+    }
+    .header-right { 
+      display: flex; 
+      align-items: center; 
+      gap: 2rem; 
+      font-size: 0.95rem; 
+      font-weight: 500; 
+    }
+    .nav-main { 
+      text-decoration: none; 
+      color: #333; 
+      transition: opacity 0.25s ease; 
+    }
+    .nav-main:hover { 
+      opacity: 0.6; 
+    }
 
     /* HEADER BAR */
-    .header-bar { position: relative; width: 100vw; left: 50%; transform: translateX(-50%); height: 1px; background: #e9e9e9; margin: 0; padding: 0; }
-    .header-bar::after { content: ""; position: absolute; left: 0; right: 0; top: 100%; height: 16px; background: linear-gradient(to bottom, rgba(0,0,0,0.12), rgba(0,0,0,0.05) 45%, rgba(0,0,0,0)); pointer-events: none; }
+    .header-bar-container {
+      width: 100%;
+      border-bottom: 1px solid #e9e9e9;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+      margin-bottom: 2rem;
+    }
 
     /* BREADCRUMB */
-    .breadcrumb { font-family: var(--sans); font-size: 0.95rem; color: #999; margin-top: 2rem; margin-bottom: 2rem; display: flex; align-items: center; gap: 0.4rem; }
-    .breadcrumb a { color: #6fb1c6; text-decoration: none; }
-    .breadcrumb a:hover { text-decoration: underline; }
-    .breadcrumb span { color: #999; }
+    .breadcrumb { 
+      font-size: 0.95rem; 
+      color: #999; 
+      margin-bottom: 2.5rem; 
+      display: flex; 
+      align-items: center; 
+      gap: 0.4rem; 
+    }
+    .breadcrumb a { 
+      color: #6fb1c6; 
+      text-decoration: none; 
+      font-weight: 500;
+    }
+    .breadcrumb a:hover { 
+      text-decoration: underline; 
+    }
+    .breadcrumb span { 
+      color: #999; 
+    }
 
     /* LAYOUT */
-    .blog-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: start; background: #fff; position: relative; padding-bottom: 3rem; }
-    .hero-container, .side-column { background: #fff; }
+    .blog-layout { 
+      display: grid; 
+      grid-template-columns: 1.1fr 0.9fr; 
+      gap: 3rem; 
+      align-items: start; 
+      padding-bottom: 4rem; 
+    }
 
-    /* HERO TITLE */
-    .hero-title { font-family: var(--serif); font-size: clamp(2.5rem, 3.5vw, 2.5rem); line-height: 0.40; margin-left: -3.5vw; margin-top: 1rem; margin-bottom: -5rem; }
+    /* HERO TITLE - Now using loaded Bold weight */
+    .hero-title { 
+      font-family: var(--serif); 
+      font-size: clamp(2rem, 3.8vw, 3.1rem); 
+      font-weight: 700; 
+      line-height: 0.76; 
+      margin-bottom: -4.9rem;
+      color: #000;
+      position: relative;
+      z-index: 10;
+    }
     .hero-title .line { display: block; }
-    .hero-title .line-1 { margin-left: -2rem; }
-    .hero-title .line-2 { margin-left: -2.2rem; }
-    .hero-title .line-3 { margin-left: 1.8rem; }
+    .hero-title .line-1 { margin-left: -4rem; } /* Fixed: 0 does not need a unit */
+    .hero-title .line-2 { margin-left: -4rem }
+    .hero-title .line-3 { margin-left: 1rem }
 
     /* HERO IMAGE */
-    .hero-image-wrap { width: 100%; max-width: 480px; margin-left: -4vw; margin-top: 2rem; -webkit-mask-image: url("https://assets.codepen.io/15642444/Hero.svg"); mask-image: url("https://assets.codepen.io/15642444/Hero.svg"); -webkit-mask-size: contain; mask-size: contain; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-position: top left; mask-position: top left; }
-    .hero-image-wrap img { width: 100%; height: 100%; display: block; object-fit: cover; object-position: center top; }
+    .hero-image-wrap { 
+      width: 100%; 
+      max-width: 600px; 
+      margin-top: 0.5rem;
+      margin-left: -5%;
+      position: relative; 
+      z-index: 1; 
+      -webkit-mask-image: url("https://assets.codepen.io/15642444/Hero.svg"); 
+      mask-image: url("https://assets.codepen.io/15642444/Hero.svg"); 
+      -webkit-mask-size: contain; 
+      mask-size: contain; 
+      -webkit-mask-repeat: no-repeat; 
+      mask-repeat: no-repeat; 
+      -webkit-mask-position: top left; 
+      mask-position: top left; 
+    }
+    .hero-image-wrap img { 
+      width: 100%; 
+      height: 100%; 
+      display: block; 
+      object-fit: cover; 
+      object-position: center top; 
+    }
 
+    /* HERO TEXT */
     .hero-paragraph { 
-  font-family: var(--sans); 
-  line-height: 1.4; 
-  margin-left: -3.5vw; 
-  margin-top: -2.8rem; 
-  max-width: 20ch; 
-  text-align: center; 
-}
+      font-family: var(--sans); 
+      font-size: 1rem;
+      line-height: 1.6; 
+      margin-top: -3rem;
+      margin-left: -6%;
+      margin-bottom: 1.5rem; 
+      max-width: 43%; 
+      text-align: justify; 
+      color: #333;
+      position: relative;
+      z-index: 10;
+    }
     
     /* READMORE */
-    .readmore { text-decoration: none; border-bottom: 1px solid #333; color: #333; }
+    .readmore { 
+      font-weight: 600;
+      text-decoration: none; 
+      border-bottom: 1.5px solid #000; 
+      color: #000; 
+      padding-bottom: 2px;
+      display: inline-block;
+      position: relative;
+      z-index: 10;
+    }
 
     /* SIDE COLUMN */
-    .side-column { display: flex; flex-direction: column; gap: 3rem; }
-    .card-img { width: 100%; border-radius: 22px; margin-bottom: 1rem; }
-    .card-title { font-family: var(--serif); font-size: 1.5rem; margin-bottom: 0.5rem; }
-    .card-text { line-height: 1.55; margin-bottom: 0.75rem; }
+    .side-column { 
+      display: flex; 
+      flex-direction: column; 
+      gap: 3.5rem; 
+      padding-top: 2rem; 
+    }
+    .card-img { 
+      width: 100%; 
+      border-radius: 20px; 
+      margin-bottom: 1.25rem; 
+      display: block;
+    }
+    .card-title { 
+      font-family: var(--serif); 
+      font-size: 1.85rem; 
+      font-weight: 700; 
+      margin-bottom: 0.75rem; 
+      color: #000;
+      line-height: 1.2;
+    }
+    .card-text { 
+      line-height: 1.6; 
+      margin-bottom: 1.25rem; 
+      color: #444;
+      font-size: 1rem;
+    }
 
-    /* CARD LINK */
-    .card-link { text-decoration: none !important; color: #2a2a2a !important; display: block; cursor: pointer; }
-    .card-link:link, .card-link:visited, .card-link:hover, .card-link:active { text-decoration: none !important; color: #2a2a2a !important; }
-    .card-link h2, .card-link h3, .card-link p, .card-link span { text-decoration: none !important; color: #2a2a2a !important; }
-    .card-link:hover { opacity: 0.88; transition: opacity 0.25s; }
+    /* CARD LINK RESET */
+    .card-link { 
+      text-decoration: none; 
+      color: inherit; 
+      display: block; 
+      cursor: pointer; 
+      transition: opacity 0.2s ease;
+    }
+    .card-link:hover { 
+      opacity: 0.8; 
+    }
 
     /* FOOTER */
-    .site-footer { width: 100%; background: #fff; padding: 2rem 0; border-top: 1px solid #e5e5e5; display: flex; justify-content: center; margin-top: 3rem; }
-    .footer-inner { width: 100%; max-width: 2400px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 0.5rem; }
-    .footer-inner a { color: #333; text-decoration: none; font-size: 0.9rem; }
-    .footer-logo { height: 38px; width: auto; }
-    .footer-copy { font-size: 0.85rem; color: #444; }
+    .site-footer { 
+      width: 100%; 
+      background: #fff; 
+      padding: 3rem 0; 
+      border-top: 1px solid #e5e5e5; 
+      display: flex; 
+      justify-content: center; 
+    }
+    .footer-inner { 
+      width: 100%; 
+      display: flex; 
+      flex-direction: column; 
+      align-items: center; 
+      text-align: center; 
+      gap: 1.2rem; 
+    }
+    .footer-inner a { 
+      color: #444; 
+      text-decoration: none; 
+      font-size: 0.9rem; 
+    }
+    .footer-inner a:hover {
+      text-decoration: underline;
+    }
+    .footer-logo { 
+      height: 38px; 
+      width: auto; 
+    }
+    .footer-copy { 
+      font-size: 0.85rem; 
+      color: #777; 
+    }
 
-    @media(max-width: 900px) { .blog-layout { grid-template-columns: 1fr; } }
+    /* RESPONSIVE */
+    @media(max-width: 900px) { 
+      .blog-layout { grid-template-columns: 1fr; gap: 4rem; } 
+      .hero-title .line-2, .hero-title .line-3 { padding-left: 0; }
+      .hero-title { margin-bottom: 0; }
+      .hero-image-wrap { margin-left: 0; }
+      .hero-paragraph { margin-top: 1rem; margin-left: 0; }
+      .side-column { padding-top: 0; }
+    }
   </style>
 </head>
 <body>
 
-<div class="page-container">
-  <header class="blog-header">
-    <div class="blog-header-inner">
+<div class="header-bar-container">
+  <div class="page-wrapper">
+    <header class="blog-header">
       <div class="header-left">
         <img src="https://imgur.com/5rAwWDG.jpeg" alt="eXp Realty Logo" class="header-logo">
       </div>
@@ -92,62 +268,68 @@
         <a href="#" class="nav-main">Other ▾</a>
         <a href="#" class="nav-main">Resources ▾</a>
       </nav>
-    </div>
-  </header>
-  <div class="header-bar"></div>
+    </header>
+  </div>
 </div>
 
-<nav class="breadcrumb">
-  <a href="#">Home</a> <span>›</span> <span>Blog</span>
-</nav>
+<div class="page-wrapper">
+  <nav class="breadcrumb">
+    <a href="#">Home</a> <span>›</span> <span>Blog</span>
+  </nav>
 
-<div class="blog-layout">
+  <div class="blog-layout">
 
-  <div class="hero-container">
-    <a href="color-psychology.html" class="card-link">
-      <h2 class="hero-title">
-        <span class="line line-1">The Psychology of</span><br>
-        <span class="line line-2">Color in Home</span><br>
-        <span class="line line-3">Design</span>
-      </h2>
-      <div class="hero-image-wrap">
-        <img src="https://assets.codepen.io/15642444/Screenshot%202025-10-20%20at%201.41.31%E2%80%AFPM.png" alt="">
+    <div class="hero-container">
+      <a href="color-psychology.html" class="card-link">
+        <h2 class="hero-title">
+          <span class="line line-1">The Psychology of</span>
+          <span class="line line-2">Color in Home</span>
+          <span class="line line-3">Design</span>
+        </h2>
+        <div class="hero-image-wrap">
+          <img src="https://assets.codepen.io/15642444/Screenshot%202025-10-20%20at%201.41.31%E2%80%AFPM.png" alt="Colorful gradient representing psychology of color">
+        </div>
+        <p class="hero-paragraph">
+          Colors shape emotion, memory, and how we experience a space before we even
+          have the words for it. In home design, intentional color choices can make a
+          room feel calm, grounded, or light-filled, guiding how potential buyers
+          imagine themselves living there.
+        </p>
+        <span class="readmore">Read More →</span>
+      </a>
+    </div>
+
+    <div class="side-column">
+      <div class="card">
+        <a href="prepare-home-for-sale.html" class="card-link">
+          <img src="https://i.imgur.com/AZjeDnA.jpg" alt="Woman putting up a For Sale sign" class="card-img">
+          <h3 class="card-title">How to Prepare Your Home for Sale</h3>
+          <p class="card-text">A thoughtful approach to decluttering, styling, and emotionally transitioning your home — not just tidying it.</p>
+          <span class="readmore">Read More →</span>
+        </a>
       </div>
-      <p class="hero-paragraph">
-        Colors shape emotion, memory, and how we experience a space before we even
-        have the words for it. In home design, intentional color choices can make a
-        room feel calm, grounded, or light-filled, guiding how potential buyers
-        imagine themselves living there.
-      </p>
-      <span class="readmore">Read More →</span>
-    </a>
-  </div>
-
-  <div class="side-column">
-    <div class="card">
-      <a href="prepare-home-for-sale.html" class="card-link">
-        <img src="https://i.imgur.com/AZjeDnA.jpg" alt="" class="card-img">
-        <h3 class="card-title">How to Prepare Your Home for Sale</h3>
-        <p class="card-text">A thoughtful approach to decluttering, styling, and emotionally transitioning your home — not just tidying it.</p>
-        <span class="readmore">Read More →</span>
-      </a>
+      
+      <div class="card">
+        <a href="usda-loans-ocala.html" class="card-link">
+          <h3 class="card-title">USDA Loans in Ocala: Zero Down Options</h3>
+          <img src="https://i.imgur.com/o5Bh1wB.jpeg" alt="3D Zero percent sign" class="card-img">
+          <p class="card-text">Ocala is USDA-loan eligible — offering zero down payment financing and an accessible path to homeownership.</p>
+          <span class="readmore">Read More →</span>
+        </a>
+      </div>
     </div>
-    <div class="card">
-      <a href="usda-loans-ocala.html" class="card-link">
-        <h3 class="card-title">USDA Loans in Ocala: Zero Down Options</h3>
-        <img src="https://i.imgur.com/o5Bh1wB.jpeg" alt="" class="card-img">
-        <p class="card-text">Ocala is USDA-loan eligible — offering zero down payment financing and an accessible path to homeownership.</p>
-        <span class="readmore">Read More →</span>
-      </a>
-    </div>
-  </div>
 
+  </div>
 </div>
 
 <footer class="site-footer">
-  <div class="footer-inner">
+  <div class="footer-inner page-wrapper">
     <div>
-      <a href="#">Accessibility</a> | <a href="#">Terms of Service</a> | <a href="#">Privacy Policy</a> | <a href="#">DMCA Notice</a> | <a href="#">Sitemap</a>
+      <a href="#">Accessibility</a> &nbsp;|&nbsp; 
+      <a href="#">Terms of Service</a> &nbsp;|&nbsp; 
+      <a href="#">Privacy Policy</a> &nbsp;|&nbsp; 
+      <a href="#">DMCA Notice</a> &nbsp;|&nbsp; 
+      <a href="#">Sitemap</a>
     </div>
     <div><img src="https://imgur.com/uwPw7OD.jpeg" alt="Equal Housing Opportunity" class="footer-logo"></div>
     <div class="footer-copy">© 2025 Catalina Jimenez · eXp Realty · All Rights Reserved</div>
