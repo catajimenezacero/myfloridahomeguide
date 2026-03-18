@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>New Construction Communities | My Florida Home Guide</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --serif: "Cormorant Garamond", serif;
+      --sans: "Inter", sans-serif;
+      --accent: #c8a96e;
+      --dark: #1a1a1a;
+      --light: #f9f7f4;
+      --mid: #6b6b6b;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: var(--sans); background: var(--light); color: var(--dark); }
+
+    .header-bar-container { width: 100%; background: #fff; border-bottom: 1px solid #e9e9e9; box-shadow: 0 2px 10px rgba(0,0,0,0.04); }
+    .page-wrapper { max-width: 1300px; margin: 0 auto; padding: 0 5vw; }
+    .blog-header { width: 100%; padding: 1.25rem 0; display: flex; justify-content: space-between; align-items: center; }
+    .header-logo { height: 42px; width: auto; display: block; }
+    .header-right { display: flex; align-items: center; gap: 2rem; font-size: 0.95rem; font-weight: 500; }
+    .nav-main { text-decoration: none; color: #333; transition: opacity 0.25s ease; }
+    .nav-main:hover { opacity: 0.6; }
+    .nav-main.active { color: #333; text-decoration: none; }
+
+    /* DROPDOWN */
+    .nav-dropdown { position: relative; }
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #fff;
+      border: 1px solid #e9e9e9;
+      border-radius: 12px;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+      padding: 1.5rem;
+      min-width: 520px;
+      z-index: 1000;
+      padding-top: 2rem;
+      margin-top: -0.5rem;
+    }
+    .nav-dropdown:hover .dropdown-menu { display: block; }
+    .dropdown-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 2rem; }
+    .dropdown-city { margin-bottom: 1.2rem; }
+    .dropdown-city-name {
+      font-size: 0.7rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.08em; color: #999; margin-bottom: 0.4rem;
+    }
+    .dropdown-community {
+      display: block; text-decoration: none; color: #222;
+      font-size: 0.88rem; font-weight: 500; padding: 0.25rem 0; transition: color 0.2s;
+    }
+    .dropdown-community:hover { color: #c8a96e; }
+
+    .hero { background: var(--dark); color: #fff; padding: 5rem 5vw 4rem; text-align: center; position: relative; overflow: hidden; }
+    .hero::before { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse at 30% 50%, rgba(200,169,110,0.15) 0%, transparent 60%), radial-gradient(ellipse at 70% 20%, rgba(200,169,110,0.1) 0%, transparent 50%); }
+    .hero-content { position: relative; z-index: 1; }
+    .hero-eyebrow { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; }
+    .hero h1 { font-family: var(--serif); font-size: clamp(2.8rem, 6vw, 5rem); font-weight: 700; line-height: 1.05; margin-bottom: 1.25rem; }
+    .hero p { font-size: 1.05rem; color: rgba(255,255,255,0.7); max-width: 520px; margin: 0 auto 2rem; line-height: 1.7; }
+    .hero-stats { display: flex; justify-content: center; gap: 3rem; margin-top: 2.5rem; padding-top: 2.5rem; border-top: 1px solid rgba(255,255,255,0.1); }
+    .stat-number { font-family: var(--serif); font-size: 2.2rem; font-weight: 700; color: var(--accent); display: block; }
+    .stat-label { font-size: 0.8rem; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 0.25rem; }
+
+    .filter-bar { background: #fff; border-bottom: 1px solid #eee; padding: 1rem 5vw; display: flex; gap: 0.75rem; flex-wrap: wrap; align-items: center; }
+    .filter-label { font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--mid); margin-right: 0.5rem; }
+    .filter-btn { padding: 0.45rem 1.1rem; border-radius: 100px; border: 1.5px solid #ddd; background: #fff; font-family: var(--sans); font-size: 0.85rem; font-weight: 500; color: #555; cursor: pointer; transition: all 0.2s ease; }
+    .filter-btn:hover, .filter-btn.active { border-color: var(--dark); background: var(--dark); color: #fff; }
+
+    .main-content { max-width: 1300px; margin: 0 auto; padding: 3rem 5vw 5rem; }
+
+    .city-section { margin-bottom: 4rem; }
+    .city-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 2px solid var(--dark); flex-wrap: wrap; }
+    .city-name { font-family: var(--serif); font-size: 1.7rem; font-weight: 700; }
+    .city-badge { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; background: var(--accent); color: #fff; padding: 0.25rem 0.75rem; border-radius: 100px; }
+    .city-count { margin-left: auto; font-size: 0.85rem; color: var(--mid); }
+
+    .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; }
+    .community-card { background: #fff; border-radius: 16px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.06); transition: transform 0.3s ease, box-shadow 0.3s ease; display: flex; flex-direction: column; }
+    .community-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.12); }
+    .card-image-placeholder { width: 100%; height: 200px; background: linear-gradient(135deg, #e8e4dc, #d4cfc5); display: flex; align-items: center; justify-content: center; font-size: 3.5rem; }
+    .card-body { padding: 1.5rem; flex: 1; display: flex; flex-direction: column; }
+    .card-builder { font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: var(--accent); margin-bottom: 0.4rem; }
+    .card-name { font-family: var(--serif); font-size: 1.35rem; font-weight: 700; line-height: 1.2; margin-bottom: 0.5rem; color: var(--dark); }
+    .card-location { font-size: 0.82rem; color: var(--mid); margin-bottom: 1rem; }
+    .card-specs { display: flex; gap: 1rem; margin-bottom: 1rem; flex-wrap: wrap; }
+    .spec-value { font-size: 0.9rem; font-weight: 600; color: var(--dark); display: block; }
+    .spec-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--mid); }
+    .card-desc { font-size: 0.85rem; color: #666; line-height: 1.5; margin-bottom: 0.5rem; }
+    .card-price { font-family: var(--serif); font-size: 1.5rem; font-weight: 700; color: var(--dark); margin-top: auto; padding-top: 1rem; border-top: 1px solid #f0f0f0; }
+    .card-price span { font-family: var(--sans); font-size: 0.8rem; font-weight: 400; color: var(--mid); }
+    .card-cta { display: block; margin-top: 1rem; padding: 0.65rem 1.25rem; background: var(--dark); color: #fff; border-radius: 8px; text-decoration: none; font-size: 0.85rem; font-weight: 600; transition: background 0.2s ease; text-align: center; }
+    .card-cta:hover { background: #333; }
+    .availability-badge { display: inline-block; font-size: 0.7rem; font-weight: 600; padding: 0.2rem 0.6rem; border-radius: 100px; margin-bottom: 0.75rem; }
+    .badge-now { background: #e8f5e9; color: #2e7d32; }
+    .badge-soon { background: #fff3e0; color: #e65100; }
+
+    /* CONTACT MODAL OVERLAY */
+    .contact-modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(15,15,15,0.6);
+      backdrop-filter: blur(6px);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+    .contact-modal-overlay.open { display: flex; }
+
+    .contact-modal {
+      background: #fff;
+      border-radius: 20px;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.25);
+      width: 100%;
+      max-width: 480px;
+      overflow: hidden;
+      animation: modalSlideUp 0.32s cubic-bezier(0.34,1.56,0.64,1);
+      position: relative;
+    }
+    @keyframes modalSlideUp {
+      from { transform: translateY(30px) scale(0.97); opacity: 0; }
+      to   { transform: translateY(0) scale(1); opacity: 1; }
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 1rem; right: 1rem;
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(0,0,0,0.08);
+      cursor: pointer;
+      font-size: 1rem;
+      color: #555;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s;
+      z-index: 2;
+    }
+    .modal-close:hover { background: rgba(0,0,0,0.15); }
+
+    .modal-accent-bar {
+      height: 5px;
+      background: linear-gradient(90deg, #2563eb, #1e40af);
+    }
+
+    .modal-body {
+      padding: 2rem 2rem 1.5rem;
+    }
+
+    .modal-agent-row {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid #f0f0f0;
+      margin-bottom: 1.5rem;
+    }
+
+    .modal-agent-photo {
+      width: 72px; height: 72px;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: top;
+      border: 3px solid #f0f0f0;
+      flex-shrink: 0;
+    }
+
+    .modal-agent-info { flex: 1; }
+
+    .modal-agent-name {
+      font-family: var(--sans);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 0.15rem;
+    }
+
+    .modal-agent-title {
+      font-size: 0.82rem;
+      color: #888;
+      font-weight: 500;
+      letter-spacing: 0.03em;
+    }
+
+    .modal-exp-logo {
+      height: 28px;
+      width: auto;
+      margin-top: 0.4rem;
+    }
+
+    .modal-contacts {
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+      margin-bottom: 1.75rem;
+    }
+
+    .modal-contact-row {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: #2563eb;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: opacity 0.2s;
+    }
+    .modal-contact-row:hover { opacity: 0.7; }
+
+    .modal-contact-icon {
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      background: #eff6ff;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.85rem;
+      flex-shrink: 0;
+    }
+
+    .modal-community-name {
+      font-size: 0.78rem;
+      text-align: center;
+      color: #aaa;
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: 600;
+    }
+
+    .modal-actions {
+      display: flex;
+      gap: 0.75rem;
+    }
+
+    .modal-btn-primary {
+      flex: 1;
+      padding: 0.75rem;
+      background: #1a1a1a;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-family: var(--sans);
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      text-align: center;
+      transition: background 0.2s;
+    }
+    .modal-btn-primary:hover { background: #333; }
+
+    .modal-btn-secondary {
+      flex: 1;
+      padding: 0.75rem;
+      background: #fff;
+      color: #1a1a1a;
+      border: 1.5px solid #ddd;
+      border-radius: 10px;
+      font-family: var(--sans);
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      text-align: center;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .modal-btn-secondary:hover { border-color: #1a1a1a; background: #fafafa; }
+
+    .modal-tagline {
+      text-align: center;
+      font-style: italic;
+      font-size: 0.8rem;
+      color: #bbb;
+      margin-top: 1.25rem;
+    }
+
+    /* FOOTER */
+    .site-footer {
+      width: 100%;
+      background: var(--dark);
+      padding: 2rem 5vw;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      display: flex;
+      justify-content: center;
+    }
+    .footer-inner {
+      width: 100%;
+      max-width: 1300px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 1rem;
+    }
+    .footer-inner a {
+      color: rgba(255,255,255,0.6);
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+    .footer-inner a:hover { color: #fff; }
+    .footer-logo { height: 38px; width: auto; }
+    .footer-copy { font-size: 0.85rem; color: rgba(255,255,255,0.5); }
+
+    @media (max-width: 768px) {
+      .hero-stats { gap: 1.5rem; }
+      .cards-grid { grid-template-columns: 1fr; }
+      .city-count { margin-left: 0; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="header-bar-container">
+  <div class="page-wrapper">
+    <header class="blog-header">
+      <div class="header-left">
+        <a href="index.html"><img src="https://imgur.com/5rAwWDG.jpeg" alt="eXp Realty Logo" class="header-logo"></a>
+      </div>
+      <nav class="header-right">
+        <a href="https://catalinajimenezfl.exprealty.com/index.php?homesearchmore=1#advanced_search_form" class="nav-main">Search</a>
+        <a href="#" class="nav-main">Sell</a>
+        <div class="nav-dropdown">
+          <a href="new-construction.html" class="nav-main active" style="line-height:1.2; text-align:center; text-decoration:none; border-bottom:none;">New Construction<br>Communities ▾</a>
+          <div class="dropdown-menu">
+            <div class="dropdown-grid">
+              <div class="dropdown-city">
+                <div class="dropdown-city-name">St. Cloud</div>
+                <a href="https://www.delwebb.com/homes/florida/orlando/st-cloud/del-webb-sunbridge-210031" target="_blank" class="dropdown-community">Sunbridge</a>
+                <a href="https://www.meritagehomes.com/state/fl/orlando/the-meadow-at-crossprairie" target="_blank" class="dropdown-community">The Meadow at Crossprairie</a>
+                <a href="https://www.risewellhomes.com" target="_blank" class="dropdown-community">Brack Ranch</a>
+              </div>
+              <div class="dropdown-city">
+                <div class="dropdown-city-name">Winter Garden</div>
+                <a href="https://dreamfindershomes.com/new-homes/fl/winter-garden/serenade-at-ovation/" target="_blank" class="dropdown-community">Serenade at Ovation</a>
+                <a href="https://www.drhorton.com/florida/orange-county/winter-garden/waterleigh" target="_blank" class="dropdown-community">Waterleigh</a>
+              </div>
+              <div class="dropdown-city">
+                <div class="dropdown-city-name">Winter Haven</div>
+                <a href="https://dreamfindershomes.com/new-homes/fl/winter-haven/annabelle-estates/" target="_blank" class="dropdown-community">Annabelle Estates</a>
+              </div>
+              <div class="dropdown-city">
+                <div class="dropdown-city-name">Minneola</div>
+                <a href="https://dreamfindershomes.com/new-homes/fl/minneola/hills-of-minneola/" target="_blank" class="dropdown-community">Hills of Minneola</a>
+                <a href="https://landseahomes.com/florida/lake-county/minneola/park-view-at-the-hills/" target="_blank" class="dropdown-community">Parkview at the Hills</a>
+              </div>
+              <div class="dropdown-city">
+                <div class="dropdown-city-name">Apopka</div>
+                <a href="https://www.drhorton.com/florida/orange-county/apopka/crossroads-at-kelly-park" target="_blank" class="dropdown-community">Crossroads at Kelly Park</a>
+                <a href="https://landseahomes.com/florida/orange-county/apopka/oakview/" target="_blank" class="dropdown-community">Oakview</a>
+              </div>
+              <div class="dropdown-city">
+                <div class="dropdown-city-name">Clermont</div>
+                <a href="https://www.drhorton.com/florida/central-florida/clermont" target="_blank" class="dropdown-community">Cagan Crossings West</a>
+                <a href="https://www.drhorton.com/florida/central-florida/clermont" target="_blank" class="dropdown-community">Ridgeview</a>
+              </div>
+              <div class="dropdown-city">
+                <div class="dropdown-city-name">Davenport</div>
+                <a href="https://www.risewellhomes.com" target="_blank" class="dropdown-community">Preservation Pointe</a>
+                <a href="https://www.drhorton.com/florida/polk-county/davenport/horse-creek-at-crosswinds-townhomes" target="_blank" class="dropdown-community">Horse Creek</a>
+              </div>
+              <div class="dropdown-city">
+                <div class="dropdown-city-name">Ocala</div>
+                <a href="https://www.richmondamerican.com/florida/orlando-new-homes/ocala/seasons-at-aurora-oaks/pine/34780000-0049/" target="_blank" class="dropdown-community">Aurora Oaks</a>
+                <a href="https://www.drhorton.com/florida/central-florida/ocala" target="_blank" class="dropdown-community">Cherrywood Preserve</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <a href="#" class="nav-main">Other ▾</a>
+        <a href="index.html" class="nav-main">Resources ▾</a>
+      </nav>
+    </header>
+  </div>
+</div>
+
+<section class="hero">
+  <div class="hero-content">
+    <p class="hero-eyebrow">Central Florida</p>
+    <h1>New Construction<br><em>Communities</em></h1>
+    <p>Discover brand-new homes across the most sought-after communities in Central Florida — from St. Cloud to Winter Garden and beyond.</p>
+    <div class="hero-stats">
+      <div class="stat-item"><span class="stat-number">600+</span><span class="stat-label">Available Homes</span></div>
+      <div class="stat-item"><span class="stat-number">8</span><span class="stat-label">Areas</span></div>
+      <div class="stat-item"><span class="stat-number">$300K+</span><span class="stat-label">Starting From</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="filter-bar">
+  <span class="filter-label">Filter:</span>
+  <button class="filter-btn active" onclick="filterCity('all', this)">All Areas</button>
+  <button class="filter-btn" onclick="filterCity('st-cloud', this)">St. Cloud</button>
+  <button class="filter-btn" onclick="filterCity('winter-garden', this)">Winter Garden</button>
+  <button class="filter-btn" onclick="filterCity('minneola', this)">Minneola</button>
+  <button class="filter-btn" onclick="filterCity('apopka', this)">Apopka</button>
+  <button class="filter-btn" onclick="filterCity('clermont', this)">Clermont</button>
+  <button class="filter-btn" onclick="filterCity('winter-haven', this)">Winter Haven</button>
+  <button class="filter-btn" onclick="filterCity('davenport', this)">Davenport</button>
+  <button class="filter-btn" onclick="filterCity('ocala', this)">Ocala</button>
+</div>
+
+<div class="main-content">
+
+  <!-- ST. CLOUD -->
+  <div class="city-section" data-city="st-cloud" id="st-cloud">
+    <div class="city-header">
+      <h2 class="city-name">St. Cloud</h2>
+      <span class="city-badge">Hot Market</span>
+      <span class="city-count">45+ homes available</span>
+    </div>
+    <div class="cards-grid">
+      <div class="community-card">
+        <img src="https://i.imgur.com/QOpG8MH.jpg" alt="Sunbridge Community" style="width:100%;height:200px;object-fit:cover;">
+        <div class="card-body">
+          <span class="availability-badge badge-now">Move-In Ready</span>
+          <p class="card-builder">Ashton Woods · Del Webb · Pulte</p>
+          <h3 class="card-name">Sunbridge</h3>
+          <p class="card-location">📍 N. Narcoossee Rd, St. Cloud</p>
+          <div class="card-specs">
+            <div class="spec-item"><span class="spec-value">3–5</span><span class="spec-label">Beds</span></div>
+            <div class="spec-item"><span class="spec-value">2–3</span><span class="spec-label">Baths</span></div>
+            <div class="spec-item"><span class="spec-value">Miles of trails</span><span class="spec-label">Amenity</span></div>
+          </div>
+          <p class="card-desc">Florida's newest master-planned community with oak trees, nature trails, and resort-style living just 30 min from downtown Orlando.</p>
+          <div class="card-price">From $342,000 <span>/ new construction</span></div>
+          <a href="https://www.delwebb.com/homes/florida/orlando/st-cloud/del-webb-sunbridge-210031" class="card-cta" target="_blank" rel="noopener">View on Builder Site →</a>
+        </div>
+      </div>
+      <div class="community-card">
+        <img src="https://i.imgur.com/G7KX3lk.jpg" alt="The Meadow at Crossprairie" style="width:100%;height:200px;object-fit:cover;">
+        <div class="card-body">
+          <span class="availability-badge badge-now">Move-In Ready</span>
+          <p class="card-builder">Meritage Homes</p>
+          <h3 class="card-name">The Meadow at Crossprairie</h3>
+          <p class="card-location">📍 St. Cloud, FL 34771</p>
+          <div class="card-specs">
+            <div class="spec-item"><span class="spec-value">3–4</span><span class="spec-label">Beds</span></div>
+            <div class="spec-item"><span class="spec-value">2–3</span><span class="spec-label">Baths</span></div>
+            <div class="spec-item"><span class="spec-value">2 car</span><span class="spec-label">Garage</span></div>
+          </div>
+          <p class="card-desc">Part of the growing Crossprairie master plan with easy access to Lake Nona's Medical City and major corridors.</p>
+          <div class="card-price">From $342,000 <span>/ new construction</span></div>
+          <a href="https://www.meritagehomes.com/state/fl/orlando/the-meadow-at-crossprairie" class="card-cta" target="_blank" rel="noopener">View on Builder Site →</a>
+        </div>
+      </div>
+      <div class="community-card">
+        <img src="https://i.imgur.com/bzK72dX.jpg" alt="Brack Ranch" style="width:100%;height:200px;object-fit:cover;">
+        <div class="card-body">
+          <span class="availability-badge badge-now">Move-In Ready</span>
+          <p class="card-builder">Multiple Builders</p>
+          <h3 class="card-name">Brack Ranch</h3>
+          <p class="card-location">📍 St. Cloud, FL</p>
+          <div class="card-specs">
+            <div class="spec-item"><span class="spec-value">3–5</span><span class="spec-label">Beds</span></div>
+            <div class="spec-item"><span class="spec-value">2–4</span><span class="spec-label">Baths</span></div>
+            <div class="spec-item"><span class="spec-value">Resort pool</span><span class="spec-label">Amenity</span></div>
+          </div>
+          <p class="card-desc">Spacious homesites with modern finishes and convenient access to the Florida Turnpike and Lake Nona.</p>
+          <div class="card-price">Up to $618,990 <span>/ new construction</span></div>
+          <a href="https://www.risewellhomes.com" class="card-cta" target="_blank" rel="noopener">View on Builder Site →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WINTER GARDEN -->
+  <div class="city-section" data-city="winter-garden" id="winter-garden">
+    <div class="city-header">
+      <h2 class="city-name">Winter Garden</h2>
+      <span class="city-badge">Top Rated</span>
+      <span class="city-count">52+ homes available</span>
+    </div>
+    <div class="cards-grid">
+      <div class="community-card">
+        <img src="https://i.imgur.com/OMFkTWY.jpg" alt="Serenade at Ovation" style="width:100%;height:200px;object-fit:cover;">
+        <div class="card-body">
+          <span class="availability-badge badge-soon">Limited Availability</span>
+          <p class="card-builder">Multiple Builders</p>
+          <h3 class="card-name">Serenade at Ovation</h3>
+          <p class="card-location">📍 Winter Garden, FL</p>
+          <div class="card-specs">
+            <div class="spec-item"><span class="spec-value">3–5</span><span class="spec-label">Beds</span></div>
+            <div class="spec-item"><span class="spec-value">2–4</span><span class="spec-label">Baths</span></div>
+            <div class="spec-item"><span class="spec-value">Luxury</span><span class="spec-label">Finishes</span></div>
+          </div>
+          <p class="card-desc">Premium new construction community featuring luxury homes with high-end finishes and resort-style community amenities.</p>
+          <div class="card-price">From $569,989 <span>/ new construction</span></div>
+          <a href="https://dreamfindershomes.com/new-homes/fl/winter-garden/serenade-at-ovation/" class="card-cta" target="_blank" rel="noopener">View on Builder Site →</a>
+        </div>
+      </div>
+      <div class="community-card">
+        <img src="https://i.imgur.com/RAZaHTe.jpg" alt="Waterleigh Winter Garden" style="width:100%;height:200px;object-fit:cover;">
+        <div class="card-body">
+          <span class="availability-badge badge-now">Move-In Ready</span>
+          <p class="card-builder">D.R. Horton</p>
+          <h3 class="card-name">Waterleigh</h3>
+          <p class="card-location">📍 Winter Garden, FL</p>
+          <div class="card-specs">
+            <div class="spec-item"><span class="spec-value">3–5</span><span class="spec-label">Beds</span></div>
+            <div class="spec-item"><span class="spec-value">2–3</span><span class="spec-label">Baths</span></div>
+            <div class="spec-item"><span class="spec-value">2 car</span><span class="spec-label">Garage</span></div>
+          </div>
+          <p class="card-desc">Beautiful community in Winter Garden with resort-style amenities, top-rated schools, and easy access to Disney and major highways.</p>
+          <div class="card-price">From $419,990 <span>/ new construction</span></div>
+          <a href="https://www.drhorton.com/florida/orange-county/winter-garden/waterleigh" class="card-cta" target="_blank" rel="noopener">View on Builder Site →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="city-section" data-city="winter-haven" id="winter-haven">
+    <div class="city-header">
+      <h2 class="city-name">Winter Haven</h2>
+      <span class="city-badge">Growing Fast</span>
+      <span class="city-count">20+ homes available</span>
+    </div>
+    <div class="cards-grid">
+      <div class="community-card">
+        <img src="https://i.imgur.com/exFKdPG.jpg" alt="Annabelle Estates" style="width:100%;height:200px;object-fit:cover;">
+        <div class="card-body">
+          <span class="availability-badge badge-now">Move-In Ready</span>
+          <p class="card-builder">Dream Finders Homes</p>
+          <h3 class="card-name">Annabelle Estates</h3>
+          <p class="card-location">📍 Winter Haven, FL 33859</p>
+          <div class="card-specs">
+            <div class="spec-item"><span class="spec-value">3–4</span><span class="spec-label">Beds</span></div>
+            <div class="spec-item"><span class="spec-value">2–3</span><span class="spec-label">Baths</span></div>
+            <div class="spec-item"><span class="spec-value">2 car</span><span class="spec-label">Garage</span></div>
+          </div>
+          <p class="card-desc">Charming community in Winter Haven with pickleball courts, dog park, and easy access to Legoland, Chain O'Lakes, and more.</p>
+          <div class="card-price">From $267,618 <span>/ new construction</span></div>
+          <a href="https://dreamfindershomes.com/new-homes/fl/winter-haven/annabelle-estates/" class="card-cta" target="_blank" rel="noopener">View on Builder Site →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MINNEOLA -->
+  <div class="city-section" data-city="minneola" id="minneola">
+    <div class="city-header">
+      <h2 class="city-name">Minneola</h2>
+      <span class="city-badge">Growing Fast</span>
+      <span class="city-count">51+ homes available</span>
+    </div>
+    <div class="cards-grid">
+      <div class="community-card">
+        <img src="https://i.imgur.com/6K3fLSv.jpg" alt="Hills of Minneola" style="width:100%;height:200px;object-fit:cover;">
+        <div class="card-body">
+          <span class="availability-badge badge-now">Move-In Ready</span>
+          <p class="card-builder">Multiple Builders</p>
+          <h3 class="card-name">Hills of Minneola</h3>
+          <p class="card-location">📍 Minneola, FL 34715</p>
+          <div class="card-specs">
+            <div class="spec-item"><span class="spec-value">3–5</span><span class="spec-label">Beds</span></div>
+            <div class="spec-item"><span class="spec-value">2–4</span><span class="spec-label">Baths</span></div>
+            <div class="spec-item"><span class="spec-value">Town center</span><span class="spec-label">Amenity</span></div>
+          </div>
+          <p class="card-desc">One of Central Florida's most exciting new master-planned communities with rolling hills, a town center, and resort amenities.</p>
+          <div class="card-price">From $415,745 <span>/ new construction</span></div>
+          <a href="https://dreamfindershomes.com/new-homes/fl/minneola/hills-of-minneola/" class="card-cta" target="_blank" rel="noopener">View on Builder Site →</a>
+        </div>
+      </div>
+      <div class="community-card">
+        <img src="https://i.imgur.com/vQKLOCl.jpg" alt="Parkview at the Hills" style="width:100%;height:200px;object-fit:cover;">
+        <div class="card-body">
+          <span class="availability-badge badge-now">Move-In Ready</span>
+          <p class="card-builder">Pulte Homes</p>
+          <h3 class="card-name">Parkview at the Hills</h3>
+          <p class="card-location">📍 Minneola, FL</p>
+          <div class="card-specs">
+            <div class="spec-item"><span class="spec-value">3–4</span><span class="spec-label">Beds</span></div>
+            <div class="spec-item"><span class="spec-value">2–3</span><span class="spec-label">Baths</span></div>
+            <div class="spec-item"><span class="spec-value">Trails</span><span class="spec-label">Amenity</span></div>
+          </div>
+          <p class="card-desc">Nestled within Hills of Minneola, offering parkside living with scenic views and walking distance to the future town center.</p>
+          <div class="card-price">From $669,990 <span>/ new construction</span></div>
+          <a href="https://landseahomes.com/florida/lake-county/minneola/park-view-at-the-hills/" class="card-cta" target="_blank" rel="noopener">View on Builder Site →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- APOPKA -->
+  <div class="city-section" data-city="apopka" id="apopka">
+    <div class="city-header">
+      <h2 class="city-name">Apopka</h2>
+      <span class="city-badge">Family Friendly</span>
+      <span class="city-count">31+ homes available</span>
+    </div>
+    <div class="cards-grid">
+      <div class="community-card">
+        <img src="https://i.imgur.com/WRAh5Q9.jpg" alt="Crossroads at Kelly Park" style="width:100%;height:200px;object-fit:cover;">
+        <div class="card-body">
+          <span class="availability-badge badge-now">Move-In Ready</span>
+          <p class="card-builder">Multiple Builders</p>
+          <h3 class="card-name">Crossroads at Kelly Park</h3>
+          <p class="card-location">📍 Apopka, FL 32712</p>
+          <div class="card-specs">
+            <div class="spec-item"><span class="spec-value">3–5</span><span class="spec-label">Beds</span></div>
+            <div class="spec-item"><span class="spec-value">2–3</span><span class="spec-label">Baths</span></div>
+            <div class="spec-item"><span class="spec-value">2 car</span><span class="spec-label">Garage</span></div>
+          </div>
+          <p class="card-desc">Near beautiful Kelly Park Rock Springs with family-friendly living, great schools, and natural surroundings.</p>
+          <div class="card-price">From $410,990 <span>/ new construction</span></div>
+          <a href="https://www.drhorton.com/florida/orange-county/apopka/crossroads-at-kelly-park" class="card-cta" target="_blank" rel="noopener">View on Builder Site →</a>
+        </div>
+      </div>
+      <div class="community-card">
+        <img src="https://i.imgur.com/sKWT0N7.jpg" alt="Oakview Apopka" style="width:100%;height:200px;object-fit:cover;">
+        <div class="card-body">
+          <span class="availability-badge badge-now">Move-In Ready</span>
+          <p class="card-builder">Multiple Builders</p>
+          <h3 class="card-name">Oakview</h3>
+          <p class="card-location">📍 Apopka, FL</p>
+          <div class="card-specs">
+            <div class="spec-item"><span class="spec-value">3–4</span><span class="spec-label">Beds</span></div>
+            <div class="spec-item"><span class="spec-value">2–3</span><span class="spec-label">Baths</span></div>
+            <div class="spec-item"><span class="spec-value">Pool</span><span class="spec-label">Amenity</span></div>
+          </div>
+          <p class="card-desc">Community pool, mature oak canopy, and convenient access to SR-429 make this a sought-after Apopka address.</p>
+          <div class="card-price">From $489,990 <span>/ new construction</span></div>
+          <a href="https://landseahomes.com/florida/orange-county/apopka/oakview/" class="card-cta" target="_blank" rel="noopener">View on Builder Site →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CLERMONT -->
+  <div class="city-section" data-city="clermont" id="clermont">
+    <div class="city-header">
+      <h2 class="city-name">Clermont</h2>
+      <span class="city-badge">Lake Country</span>
+      <span class="city-count">18+ homes available</span>
+    </div>
+    <div class="cards-grid">
+      <div class="community-card">
+        <img src="https://i.imgur.com/88N2fVZ.jpg" alt="Cagan Crossings West" style="width:100%;height:200px;object-fit:cover;">
+        <div class="card-body">
+          <span class="availability-badge badge-now">Move-In Ready</span>
+          <p class="card-builder">Multiple Builders</p>
+          <h3 class="card-name">Cagan Crossings West</h3>
+          <p class="card-location">📍 Clermont, FL 34714</p>
+          <div class="card-specs">
+            <div class="spec-item"><span class="spec-value">3–5</span><span class="spec-label">Beds</span></div>
+            <div class="spec-item"><span class="spec-value">2–3</span><span class="spec-label">Baths</span></div>
+            <div class="spec-item"><span class="spec-value">Lake views</span><span class="spec-label">Feature</span></div>
+          </div>
+          <p class="card-desc">Set in the beautiful hills of Clermont with lake access, shopping, and major theme parks just minutes away.</p>
+          <div class="card-price">From $350,990 <span>/ new construction</span></div>
+          <a href="https://www.drhorton.com/florida/central-florida/clermont" class="card-cta" target="_blank" rel="noopener">View on Builder Site →</a>
+        </div>
+      </div>
+      <div class="community-card">
+        <img src="https://i.imgur.com/qiLp3Mw.jpg" alt="Ridgeview Clermont" style="width:100%;height:200px;object-fit:cover;">
+        <div class="card-body">
+          <span class="availability-badge badge-now">Move-In Ready</span>
+          <p class="card-builder">Multiple Builders</p>
+          <h3 class="card-name">Ridgeview</h3>
+          <p class="card-location">📍 Clermont, FL</p>
+          <div class="card-specs">
+            <div class="spec-item"><span class="spec-value">3–5</span><span class="spec-label">Beds</span></div>
+            <div class="spec-item"><span class="spec-value">2–4</span><span class="spec-label">Baths</span></div>
+            <div class="spec-item"><span class="spec-value">Hilltop views</span><span class="spec-label">Feature</span></div>
+          </div>
+          <p class="card-desc">Elevated homesites with stunning ridgeline views in one of Central Florida's most scenic areas near the Chain of Lakes.</p>
+          <div class="card-price">From $489,990 <span>/ new construction</span></div>
+          <a href="https://www.drhorton.com/florida/central-florida/clermont" class="card-cta" target="_blank" rel="noopener">View on Builder Site →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAVENPORT -->
+  <div class="city-section" data-city="davenport" id="davenport">
+    <div class="city-header">
+      <h2 class="city-name">Davenport</h2>
+      <span class="city-badge">Great Value</span>
+      <span class="city-count">28+ homes available</span>
+    </div>
+    <div class="cards-grid">
+      <div class="community-card">
+        <img src="https://i.imgur.com/8kubfgE.jpg" alt="Preservation Pointe" style="width:100%;height:200px;object-fit:cover;">
+        <div class="card-body">
+          <span class="availability-badge badge-now">Move-In Ready</span>
+          <p class="card-builder">Risewell Homes</p>
+          <h3 class="card-name">Preservation Pointe</h3>
+          <p class="card-location">📍 Davenport, FL 33896</p>
+          <div class="card-specs">
+            <div class="spec-item"><span class="spec-value">3–4</span><span class="spec-label">Beds</span></div>
+            <div class="spec-item"><span class="spec-value">2–3</span><span class="spec-label">Baths</span></div>
+            <div class="spec-item"><span class="spec-value">2 car</span><span class="spec-label">Garage</span></div>
+          </div>
+          <p class="card-desc">Affordable new construction near Disney World and I-4, perfect for primary residence or investment near theme parks.</p>
+          <div class="card-price">From $391,990 <span>/ new construction</span></div>
+          <a href="https://www.risewellhomes.com" class="card-cta" target="_blank" rel="noopener">View on Builder Site →</a>
+        </div>
+      </div>
+      <div class="community-card">
+        <img src="https://i.imgur.com/9yDfdFh.jpg" alt="Horse Creek Davenport" style="width:100%;height:200px;object-fit:cover;">
+        <div class="card-body">
+          <span class="availability-badge badge-now">Move-In Ready</span>
+          <p class="card-builder">D.R. Horton</p>
+          <h3 class="card-name">Horse Creek</h3>
+          <p class="card-location">📍 Davenport, FL</p>
+          <div class="card-specs">
+            <div class="spec-item"><span class="spec-value">3–5</span><span class="spec-label">Beds</span></div>
+            <div class="spec-item"><span class="spec-value">2–3</span><span class="spec-label">Baths</span></div>
+            <div class="spec-item"><span class="spec-value">Smart home</span><span class="spec-label">Feature</span></div>
+          </div>
+          <p class="card-desc">Affordable new construction near Disney World and I-4, perfect for primary residence or investment near theme parks.</p>
+          <div class="card-price">From $252,990 <span>/ new construction</span></div>
+          <a href="https://www.drhorton.com/florida/polk-county/davenport/horse-creek-at-crosswinds-townhomes" class="card-cta" target="_blank" rel="noopener">View on Builder Site →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- OCALA -->
+  <div class="city-section" data-city="ocala" id="ocala">
+    <div class="city-header">
+      <h2 class="city-name">Ocala</h2>
+      <span class="city-badge">USDA Eligible</span>
+      <span class="city-count">13+ homes available</span>
+    </div>
+    <div class="cards-grid">
+      <div class="community-card">
+        <img src="https://i.imgur.com/Kzkk4dP.jpg" alt="Aurora Oaks Ocala" style="width:100%;height:200px;object-fit:cover;">
+        <div class="card-body">
+          <span class="availability-badge badge-now">Move-In Ready</span>
+          <p class="card-builder">Multiple Builders</p>
+          <h3 class="card-name">Aurora Oaks</h3>
+          <p class="card-location">📍 Ocala, FL 34471</p>
+          <div class="card-specs">
+            <div class="spec-item"><span class="spec-value">3–4</span><span class="spec-label">Beds</span></div>
+            <div class="spec-item"><span class="spec-value">2–3</span><span class="spec-label">Baths</span></div>
+            <div class="spec-item"><span class="spec-value">$0 down</span><span class="spec-label">USDA Eligible</span></div>
+          </div>
+          <p class="card-desc">USDA-eligible — qualifying buyers can purchase with zero down payment. Horse country living at its finest in Ocala.</p>
+          <div class="card-price">From $335,000 <span>/ new construction</span></div>
+          <a href="https://www.richmondamerican.com/florida/orlando-new-homes/ocala/seasons-at-aurora-oaks/pine/34780000-0049/" class="card-cta" target="_blank" rel="noopener">View on Builder Site →</a>
+        </div>
+      </div>
+      <div class="community-card">
+        <img src="https://i.imgur.com/zyoxxhE.jpg" alt="Cherrywood Preserve Ocala" style="width:100%;height:200px;object-fit:cover;">
+        <div class="card-body">
+          <span class="availability-badge badge-soon">55+ Community</span>
+          <p class="card-builder">Multiple Builders</p>
+          <h3 class="card-name">Cherrywood Preserve</h3>
+          <p class="card-location">📍 Ocala, FL</p>
+          <div class="card-specs">
+            <div class="spec-item"><span class="spec-value">3–4</span><span class="spec-label">Beds</span></div>
+            <div class="spec-item"><span class="spec-value">2</span><span class="spec-label">Baths</span></div>
+            <div class="spec-item"><span class="spec-value">$0 down</span><span class="spec-label">USDA Eligible</span></div>
+          </div>
+          <p class="card-desc">Serene preserve-style community offering peaceful living surrounded by nature with affordable new construction pricing.</p>
+          <div class="card-price">From $240,000 <span>/ new construction</span></div>
+          <a href="https://www.drhorton.com/florida/central-florida/ocala" class="card-cta" target="_blank" rel="noopener">View on Builder Site →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div>
+      <a href="#">Accessibility</a> &nbsp;|&nbsp;
+      <a href="#">Terms of Service</a> &nbsp;|&nbsp;
+      <a href="#">Privacy Policy</a> &nbsp;|&nbsp;
+      <a href="#">DMCA Notice</a> &nbsp;|&nbsp;
+      <a href="#">Sitemap</a>
+    </div>
+    <div><img src="https://imgur.com/uwPw7OD.jpeg" alt="Equal Housing Opportunity" class="footer-logo"></div>
+    <div class="footer-copy">© 2025 Catalina Jimenez · eXp Realty · All Rights Reserved</div>
+  </div>
+</footer>
+
+<!-- CONTACT MODAL -->
+<div class="contact-modal-overlay" id="contactModal" onclick="if(event.target===this) closeModal()">
+  <div class="contact-modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-accent-bar"></div>
+    <div class="modal-body">
+
+      <div class="modal-agent-row">
+        <img src="https://catalinajimenezfl.exprealty.com/img/agent-photo.jpg" alt="Catalina Jimenez" class="modal-agent-photo" id="modalAgentPhoto"
+          onerror="this.src='https://ui-avatars.com/api/?name=Catalina+Jimenez&background=1a1a1a&color=fff&size=128&bold=true'">
+        <div class="modal-agent-info">
+          <div class="modal-agent-name">Catalina Jimenez</div>
+          <div class="modal-agent-title">REALTOR® Sales Agent</div>
+          <img src="https://imgur.com/5rAwWDG.jpeg" alt="eXp Realty" class="modal-exp-logo">
+        </div>
+      </div>
+
+      <p class="modal-community-name" id="modalCommunityLabel">Interested in this community?</p>
+
+      <div class="modal-contacts">
+        <a href="tel:+14075792670" class="modal-contact-row">
+          <div class="modal-contact-icon">📞</div>
+          (407) 579-2670
+        </a>
+        <a href="mailto:catalina.jimenez.266454@exprealty.com" class="modal-contact-row">
+          <div class="modal-contact-icon">✉️</div>
+          catalina.jimenez.266454@exprealty.com
+        </a>
+        <a href="https://catalinajimenezfl.exprealty.com" target="_blank" class="modal-contact-row">
+          <div class="modal-contact-icon">🌐</div>
+          catalinajimenezfl.exprealty.com
+        </a>
+      </div>
+
+      <div class="modal-actions">
+        <a href="#" id="modalBuilderBtn" target="_blank" rel="noopener" class="modal-btn-primary">View Homes on Builder Site →</a>
+        <a href="mailto:catalina.jimenez.266454@exprealty.com" class="modal-btn-secondary">Email Me</a>
+      </div>
+
+      <p class="modal-tagline">Helping you find your dream home in Florida</p>
+    </div>
+  </div>
+</div>
+
+<script>
+  function filterCity(city, btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.city-section').forEach(section => {
+      section.style.display = (city === 'all' || section.dataset.city === city) ? 'block' : 'none';
+    });
+  }
+
+  function openContactModal(communityName, builderUrl) {
+    document.getElementById('modalCommunityLabel').textContent = 'Interested in ' + communityName + '?';
+    document.getElementById('modalBuilderBtn').href = builderUrl;
+    document.getElementById('contactModal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    document.getElementById('contactModal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeModal();
+  });
+
+  // Intercept all card CTA clicks
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.card-cta').forEach(function(btn) {
+      btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        var builderUrl = btn.href;
+        var card = btn.closest('.community-card');
+        var communityName = card.querySelector('.card-name') ? card.querySelector('.card-name').textContent : 'this community';
+        openContactModal(communityName, builderUrl);
+      });
+    });
+
+    // Also intercept image clicks on cards
+    document.querySelectorAll('.community-card img').forEach(function(img) {
+      img.style.cursor = 'pointer';
+      img.addEventListener('click', function() {
+        var card = img.closest('.community-card');
+        var cta = card.querySelector('.card-cta');
+        var builderUrl = cta ? cta.href : '#';
+        var communityName = card.querySelector('.card-name') ? card.querySelector('.card-name').textContent : 'this community';
+        openContactModal(communityName, builderUrl);
+      });
+    });
+  });
+</script>
+
+</body>
+</html>

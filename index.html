@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Florida Home Guide</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root { --serif: "Cormorant Garamond", serif; --sans: "Inter", sans-serif; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: var(--sans); background: #fff; color: #2a2a2a; }
+    .page-wrapper { max-width: 1300px; margin: 0 auto; padding: 0 5vw; }
+
+    /* HEADER */
+    .blog-header { width: 100%; padding: 1.25rem 0; background: #fff; display: flex; justify-content: space-between; align-items: center; }
+    .header-logo { height: 42px; width: auto; display: block; }
+    .header-right { display: flex; align-items: center; gap: 2rem; font-size: 0.95rem; font-weight: 500; }
+    .nav-main { text-decoration: none; color: #333; transition: opacity 0.25s ease; }
+    .nav-main:hover { opacity: 0.6; }
+    .header-bar-container { width: 100%; border-bottom: 1px solid #e9e9e9; box-shadow: 0 4px 10px rgba(0,0,0,0.02); margin-bottom: 2rem; }
+
+    /* DROPDOWN */
+    .nav-dropdown { position: relative; }
+    .dropdown-menu { display: none; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); background: #fff; border: 1px solid #e9e9e9; border-radius: 12px; box-shadow: 0 12px 40px rgba(0,0,0,0.12); padding: 2rem 1.5rem 1.5rem; min-width: 520px; z-index: 1000; margin-top: -0.5rem; }
+    .nav-dropdown:hover .dropdown-menu { display: block; }
+    .dropdown-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 2rem; }
+    .dropdown-city { margin-bottom: 1.2rem; }
+    .dropdown-city-name { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #999; margin-bottom: 0.4rem; }
+    .dropdown-community { display: block; text-decoration: none; color: #222; font-size: 0.88rem; font-weight: 500; padding: 0.25rem 0; transition: color 0.2s; }
+    .dropdown-community:hover { color: #6fb1c6; }
+
+    /* MEGA MENU */
+    .mega-menu { display: none; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); background: #fff; border: 1px solid #e9e9e9; border-radius: 12px; box-shadow: 0 12px 40px rgba(0,0,0,0.12); padding: 2rem 1.5rem 1.5rem; min-width: 300px; z-index: 1000; margin-top: -0.5rem; }
+    .nav-dropdown:hover .mega-menu { display: block; }
+    .mega-section-title { font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: #bbb; margin-bottom: 0.75rem; }
+    .mega-item { display: flex; align-items: center; gap: 0.85rem; padding: 0.6rem 0.5rem; border-radius: 8px; text-decoration: none; color: #1a1a1a; transition: background 0.15s; margin-bottom: 0.1rem; }
+    .mega-item:hover { background: #f7f5f2; }
+    .mega-icon { width: 36px; height: 36px; border-radius: 8px; background: #f0ede8; display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; }
+    .mega-item-label { font-size: 0.88rem; font-weight: 600; color: #1a1a1a; display: block; line-height: 1.2; }
+    .mega-item-desc { font-size: 0.75rem; color: #888; margin-top: 0.1rem; display: block; }
+
+    /* BREADCRUMB */
+    .breadcrumb { font-size: 0.95rem; color: #999; margin-bottom: 2.5rem; display: flex; align-items: center; gap: 0.4rem; }
+    .breadcrumb a { color: #6fb1c6; text-decoration: none; font-weight: 500; }
+    .breadcrumb span { color: #999; }
+
+    /* LAYOUT */
+    .blog-layout { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 3rem; align-items: start; padding-bottom: 4rem; }
+
+    /* HERO TITLE */
+    .hero-title { font-family: var(--serif); font-size: clamp(2rem, 3.8vw, 3.1rem); font-weight: 700; line-height: 0.76; margin-bottom: -4.9rem; color: #000; position: relative; z-index: 10; }
+    .hero-title .line { display: block; }
+    .hero-title .line-1 { margin-left: -4.6rem; }
+    .hero-title .line-2 { margin-left: -4rem; }
+    .hero-title .line-3 { margin-left: 1.5rem; }
+
+    /* HERO IMAGE */
+    .hero-image-wrap { width: 100%; max-width: 600px; margin-top: 0.5rem; margin-left: -5%; position: relative; z-index: 1; -webkit-mask-image: url("https://assets.codepen.io/15642444/Hero.svg"); mask-image: url("https://assets.codepen.io/15642444/Hero.svg"); -webkit-mask-size: contain; mask-size: contain; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-position: top left; mask-position: top left; }
+    .hero-image-wrap img { width: 100%; height: 100%; display: block; object-fit: cover; object-position: center top; }
+
+    /* HERO TEXT */
+    .hero-paragraph { font-family: var(--sans); font-size: 1rem; line-height: 1.6; margin-top: -3rem; margin-left: -6%; margin-bottom: 1.5rem; max-width: 43%; text-align: justify; color: #333; position: relative; z-index: 10; }
+    .readmore { font-weight: 600; text-decoration: none; border-bottom: 1.5px solid #000; color: #000; padding-bottom: 2px; display: inline-block; position: relative; z-index: 10; }
+
+    /* SIDE COLUMN */
+    .side-column { display: flex; flex-direction: column; gap: 3.5rem; padding-top: 2rem; }
+    .card-img { width: 100%; border-radius: 20px; margin-bottom: 1.25rem; display: block; }
+    .card-title { font-family: var(--serif); font-size: 1.85rem; font-weight: 700; margin-bottom: 0.75rem; color: #000; line-height: 1.2; }
+    .card-text { line-height: 1.6; margin-bottom: 1.25rem; color: #444; font-size: 1rem; }
+    .card-link { text-decoration: none; color: inherit; display: block; cursor: pointer; transition: opacity 0.2s ease; }
+    .card-link:hover { opacity: 0.8; }
+
+    /* FOOTER */
+    .site-footer { width: 100%; background: #fff; padding: 3rem 0; border-top: 1px solid #e5e5e5; display: flex; justify-content: center; }
+    .footer-inner { width: 100%; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 1.2rem; }
+    .footer-inner a { color: #444; text-decoration: none; font-size: 0.9rem; }
+    .footer-logo { height: 38px; width: auto; }
+    .footer-copy { font-size: 0.85rem; color: #777; }
+
+    /* MODALS SHARED */
+    @keyframes modalPop { from { transform: translateY(20px) scale(0.97); opacity: 0; } to { transform: none; opacity: 1; } }
+
+    /* SCHEDULER */
+    .scheduler-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.55); z-index: 9999; align-items: center; justify-content: center; padding: 1rem; }
+    .scheduler-overlay.open { display: flex; }
+    .scheduler-modal { background: #fff; border-radius: 18px; box-shadow: 0 30px 80px rgba(0,0,0,0.2); width: 100%; max-width: 520px; overflow: hidden; animation: modalPop 0.3s cubic-bezier(0.34,1.56,0.64,1); position: relative; }
+    .sched-header { background: #1a1a1a; color: #fff; padding: 1.5rem 1.75rem 1.25rem; }
+    .sched-header h3 { font-family: var(--serif); font-size: 1.5rem; font-weight: 700; margin-bottom: 0.2rem; }
+    .sched-header p { font-size: 0.82rem; color: rgba(255,255,255,0.55); }
+    .sched-close { position: absolute; top: 1rem; right: 1.25rem; background: rgba(255,255,255,0.12); border: none; color: #fff; width: 30px; height: 30px; border-radius: 50%; font-size: 1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+    .sched-body { padding: 1.5rem 1.75rem 1.75rem; }
+    .sched-week-nav { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; }
+    .sched-week-label { font-size: 0.88rem; font-weight: 600; color: #333; }
+    .sched-week-btn { background: #f5f5f5; border: none; border-radius: 6px; width: 30px; height: 30px; cursor: pointer; font-size: 1rem; display: flex; align-items: center; justify-content: center; }
+    .sched-days { display: grid; grid-template-columns: repeat(7, 1fr); gap: 0.4rem; margin-bottom: 1.25rem; }
+    .sched-day { display: flex; flex-direction: column; align-items: center; gap: 0.2rem; padding: 0.5rem 0.2rem; border-radius: 10px; border: 1.5px solid #eee; cursor: pointer; transition: all 0.15s; background: #fff; }
+    .sched-day:hover { border-color: #1a1a1a; }
+    .sched-day.selected { background: #1a1a1a; border-color: #1a1a1a; }
+    .sched-day.today .day-num { color: #c8a96e; font-weight: 700; }
+    .sched-day.selected .day-num, .sched-day.selected .day-name { color: #fff; }
+    .day-name { font-size: 0.62rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: #aaa; }
+    .day-num { font-size: 0.95rem; font-weight: 700; color: #1a1a1a; }
+    .sched-times-label { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #bbb; margin-bottom: 0.75rem; }
+    .sched-slots { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; max-height: 220px; overflow-y: auto; }
+    .slot-btn { padding: 0.55rem 0.5rem; border-radius: 8px; border: 1.5px solid #eee; background: #fff; font-family: var(--sans); font-size: 0.8rem; font-weight: 500; color: #333; cursor: pointer; transition: all 0.15s; text-align: center; }
+    .slot-btn:hover { border-color: #1a1a1a; }
+    .slot-btn.busy { background: #fafafa; color: #ccc; border-color: #f0f0f0; cursor: not-allowed; }
+    .slot-btn.selected { background: #1a1a1a; border-color: #1a1a1a; color: #fff; }
+    .sched-confirm-btn { width: 100%; margin-top: 1.25rem; padding: 0.85rem; background: #1a1a1a; color: #fff; border: none; border-radius: 10px; font-family: var(--sans); font-size: 0.9rem; font-weight: 700; cursor: pointer; }
+    .sched-confirm-btn:disabled { background: #ccc; cursor: not-allowed; }
+    .sched-confirm-screen { display: none; padding: 2.5rem 1.75rem; text-align: center; }
+    .sched-confirm-screen.show { display: block; }
+    .sched-checkmark { font-size: 3rem; margin-bottom: 1rem; }
+    .sched-confirm-screen h3 { font-family: var(--serif); font-size: 1.6rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .sched-confirm-screen p { color: #666; font-size: 0.92rem; line-height: 1.6; margin-bottom: 1.5rem; }
+    .sched-booked-slot { background: #f7f5f2; border-radius: 10px; padding: 1rem; font-size: 0.9rem; font-weight: 600; color: #1a1a1a; margin-bottom: 1.5rem; }
+    .sched-done-btn { padding: 0.75rem 2rem; background: #1a1a1a; color: #fff; border: none; border-radius: 8px; font-family: var(--sans); font-size: 0.88rem; font-weight: 700; cursor: pointer; }
+
+    /* POCKET LISTINGS */
+    .pocket-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.55); z-index: 9999; align-items: center; justify-content: center; padding: 1rem; }
+    .pocket-overlay.open { display: flex; }
+    .pocket-modal { background: #fff; border-radius: 18px; box-shadow: 0 30px 80px rgba(0,0,0,0.2); width: 100%; max-width: 480px; max-height: 90vh; overflow-y: auto; animation: modalPop 0.3s cubic-bezier(0.34,1.56,0.64,1); position: relative; }
+    .pocket-header { background: #1a1a1a; padding: 1.5rem 1.75rem 1.25rem; position: relative; }
+    .pocket-header h3 { font-family: var(--serif); font-size: 1.5rem; font-weight: 700; color: #fff; margin-bottom: 0.2rem; }
+    .pocket-header p { font-size: 0.82rem; color: rgba(255,255,255,0.5); }
+    .pocket-accent { display: inline-block; background: #c8a96e; color: #fff; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.2rem 0.6rem; border-radius: 100px; margin-bottom: 0.6rem; }
+    .pocket-close { position: absolute; top: 1rem; right: 1.25rem; background: rgba(255,255,255,0.12); border: none; color: #fff; width: 30px; height: 30px; border-radius: 50%; font-size: 1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+    .pocket-body { padding: 1.75rem; }
+    .pocket-field { margin-bottom: 1.1rem; }
+    .pocket-label { display: block; font-size: 0.78rem; font-weight: 700; color: #444; margin-bottom: 0.4rem; text-transform: uppercase; letter-spacing: 0.06em; }
+    .pocket-input { width: 100%; padding: 0.7rem 0.9rem; border: 1.5px solid #e5e5e5; border-radius: 8px; font-family: var(--sans); font-size: 0.9rem; color: #222; outline: none; }
+    .pocket-input:focus { border-color: #1a1a1a; }
+    .pocket-textarea { width: 100%; padding: 0.7rem 0.9rem; border: 1.5px solid #e5e5e5; border-radius: 8px; font-family: var(--sans); font-size: 0.9rem; color: #222; outline: none; resize: vertical; min-height: 110px; }
+    .pocket-textarea:focus { border-color: #1a1a1a; }
+    .pocket-submit { width: 100%; padding: 0.85rem; background: #1a1a1a; color: #fff; border: none; border-radius: 10px; font-family: var(--sans); font-size: 0.9rem; font-weight: 700; cursor: pointer; margin-top: 0.25rem; }
+    .pocket-confirm { display: none; padding: 2.5rem 1.75rem; text-align: center; }
+    .pocket-confirm.show { display: block; }
+    .pocket-confirm-icon { font-size: 2.8rem; margin-bottom: 1rem; }
+    .pocket-confirm h3 { font-family: var(--serif); font-size: 1.6rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .pocket-confirm p { color: #666; font-size: 0.9rem; line-height: 1.6; }
+
+    /* CONTACT ME */
+    .contactme-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.55); z-index: 9999; align-items: center; justify-content: center; padding: 1rem; }
+    .contactme-overlay.open { display: flex; }
+    .contactme-modal { background: #fff; border-radius: 18px; box-shadow: 0 30px 80px rgba(0,0,0,0.2); width: 100%; max-width: 420px; overflow: hidden; animation: modalPop 0.3s cubic-bezier(0.34,1.56,0.64,1); position: relative; }
+    .contactme-header { background: #1a1a1a; padding: 1.5rem 1.75rem 1.35rem; position: relative; }
+    .contactme-header h3 { font-family: var(--serif); font-size: 1.5rem; font-weight: 700; color: #fff; margin-bottom: 0.2rem; }
+    .contactme-header p { font-size: 0.82rem; color: rgba(255,255,255,0.5); }
+    .contactme-close { position: absolute; top: 1rem; right: 1.25rem; background: rgba(255,255,255,0.12); border: none; color: #fff; width: 30px; height: 30px; border-radius: 50%; font-size: 1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+    .contactme-body { padding: 1.75rem; display: flex; flex-direction: column; gap: 1rem; }
+    .contactme-row { display: flex; align-items: center; gap: 1rem; padding: 1rem 1.1rem; border-radius: 12px; background: #f7f5f2; text-decoration: none; color: #1a1a1a; transition: background 0.15s; min-width: 0; }
+    .contactme-row:hover { background: #efefeb; }
+    .contactme-row-icon { width: 42px; height: 42px; border-radius: 10px; background: #1a1a1a; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
+    .contactme-row-text { flex: 1; min-width: 0; }
+    .contactme-row-label { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #aaa; display: block; margin-bottom: 0.2rem; }
+    .contactme-row-value { font-size: 0.82rem; font-weight: 600; color: #1a1a1a; display: block; word-break: break-all; }
+    .contactme-tagline { text-align: center; font-style: italic; font-size: 0.78rem; color: #bbb; padding-bottom: 0.25rem; }
+
+    /* RESPONSIVE */
+    @media(max-width: 900px) {
+      .blog-layout { grid-template-columns: 1fr; gap: 4rem; }
+      .hero-title .line-1, .hero-title .line-2, .hero-title .line-3 { margin-left: 0; }
+      .hero-title { margin-bottom: 1rem; font-size: clamp(1.8rem, 8vw, 2.5rem); line-height: 1.1; }
+      .hero-image-wrap { margin-left: 0; max-width: 100%; }
+      .hero-paragraph { margin-top: 1rem; margin-left: 0; max-width: 100%; text-align: left; }
+      .side-column { padding-top: 0; }
+      .header-right { gap: 1.2rem; font-size: 0.88rem; }
+    }
+    @media(max-width: 480px) {
+      .header-logo { height: 30px; }
+      .header-right { gap: 0.75rem; font-size: 0.78rem; }
+      .blog-header { padding: 1rem 0; }
+      .page-wrapper { padding: 0 4vw; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="header-bar-container">
+  <div class="page-wrapper">
+    <header class="blog-header">
+      <div class="header-left">
+        <img src="https://imgur.com/5rAwWDG.jpeg" alt="eXp Realty Logo" class="header-logo">
+      </div>
+      <nav class="header-right">
+        <a href="https://catalinajimenezfl.exprealty.com/index.php?homesearchmore=1#advanced_search_form" class="nav-main">Search</a>
+        <a href="#" class="nav-main" onclick="document.getElementById('valuationModal').style.display='flex'; return false;">Sell</a>
+
+        <div class="nav-dropdown">
+          <a href="new-construction.html" class="nav-main" style="line-height:1.2; text-align:center; text-decoration:none;">New Construction<br>Communities ▾</a>
+          <div class="dropdown-menu">
+            <div class="dropdown-grid">
+              <div class="dropdown-city"><div class="dropdown-city-name">St. Cloud</div><a href="new-construction.html#st-cloud" class="dropdown-community">Sunbridge</a><a href="new-construction.html#st-cloud" class="dropdown-community">The Meadow at Crossprairie</a><a href="new-construction.html#st-cloud" class="dropdown-community">Brack Ranch</a></div>
+              <div class="dropdown-city"><div class="dropdown-city-name">Winter Garden</div><a href="new-construction.html#winter-garden" class="dropdown-community">Serenade at Ovation</a><a href="new-construction.html#winter-garden" class="dropdown-community">Waterleigh</a></div>
+              <div class="dropdown-city"><div class="dropdown-city-name">Winter Haven</div><a href="new-construction.html#winter-haven" class="dropdown-community">Annabelle Estates</a></div>
+              <div class="dropdown-city"><div class="dropdown-city-name">Minneola</div><a href="new-construction.html#minneola" class="dropdown-community">Hills of Minneola</a><a href="new-construction.html#minneola" class="dropdown-community">Parkview at the Hills</a></div>
+              <div class="dropdown-city"><div class="dropdown-city-name">Apopka</div><a href="new-construction.html#apopka" class="dropdown-community">Crossroads at Kelly Park</a><a href="new-construction.html#apopka" class="dropdown-community">Oakview</a></div>
+              <div class="dropdown-city"><div class="dropdown-city-name">Clermont</div><a href="new-construction.html#clermont" class="dropdown-community">Cagan Crossings West</a><a href="new-construction.html#clermont" class="dropdown-community">Ridgeview</a></div>
+              <div class="dropdown-city"><div class="dropdown-city-name">Davenport</div><a href="new-construction.html#davenport" class="dropdown-community">Preservation Pointe</a><a href="new-construction.html#davenport" class="dropdown-community">Horse Creek</a></div>
+              <div class="dropdown-city"><div class="dropdown-city-name">Ocala</div><a href="new-construction.html#ocala" class="dropdown-community">Aurora Oaks</a><a href="new-construction.html#ocala" class="dropdown-community">Cherrywood Preserve</a></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="nav-dropdown">
+          <a href="#" class="nav-main">Other ▾</a>
+          <div class="mega-menu" style="min-width:310px;">
+            <div class="mega-section-title">More from Catalina</div>
+            <a href="#" onclick="openPocketListings(); return false;" class="mega-item"><div class="mega-icon">🏡</div><div><span class="mega-item-label">Pocket Listings</span><span class="mega-item-desc">Off-market properties for investors &amp; flippers</span></div></a>
+            <a href="#" onclick="openScheduler(); return false;" class="mega-item"><div class="mega-icon">📅</div><div><span class="mega-item-label">Schedule a Call</span><span class="mega-item-desc">Pick an available time to talk</span></div></a>
+            <a href="#" onclick="openContactMe(); return false;" class="mega-item"><div class="mega-icon">✉️</div><div><span class="mega-item-label">Contact Me</span><span class="mega-item-desc">Email or call Catalina directly</span></div></a>
+          </div>
+        </div>
+
+        <div class="nav-dropdown">
+          <a href="#" class="nav-main">Resources ▾</a>
+          <div class="mega-menu" style="min-width:310px; right:0; left:auto; transform:none;">
+            <div class="mega-section-title">Buyer &amp; Seller Resources</div>
+            <a href="usda-loans-ocala.html" class="mega-item"><div class="mega-icon">🏦</div><div><span class="mega-item-label">USDA Loans in Ocala</span><span class="mega-item-desc">Zero down payment options explained</span></div></a>
+            <a href="prepare-home-for-sale.html" class="mega-item"><div class="mega-icon">🔑</div><div><span class="mega-item-label">Prepare to Sell</span><span class="mega-item-desc">Get the best price for your home</span></div></a>
+            <a href="https://catalinajimenezfl.exprealty.com/mortgage-calculator/" target="_blank" class="mega-item"><div class="mega-icon">🧮</div><div><span class="mega-item-label">Mortgage Calculator</span><span class="mega-item-desc">Estimate your monthly payments</span></div></a>
+            <a href="color-psychology.html" class="mega-item"><div class="mega-icon">🎨</div><div><span class="mega-item-label">Design &amp; Staging Tips</span><span class="mega-item-desc">Present your home beautifully</span></div></a>
+          </div>
+        </div>
+      </nav>
+    </header>
+  </div>
+</div>
+
+<div class="page-wrapper">
+  <nav class="breadcrumb">
+    <a href="#">Home</a> <span>›</span> <span>Blog</span>
+  </nav>
+  <div class="blog-layout">
+    <div class="hero-container">
+      <a href="color-psychology.html" class="card-link">
+        <h2 class="hero-title">
+          <span class="line line-1">The Psychology of</span>
+          <span class="line line-2">Color in Home</span>
+          <span class="line line-3">Design</span>
+        </h2>
+        <div class="hero-image-wrap">
+          <img src="https://assets.codepen.io/15642444/Screenshot%202025-10-20%20at%201.41.31%E2%80%AFPM.png" alt="Colorful gradient representing psychology of color">
+        </div>
+        <p class="hero-paragraph">Colors shape emotion, memory, and how we experience a space before we even have the words for it. In home design, intentional color choices can make a room feel calm, grounded, or light-filled, guiding how potential buyers imagine themselves living there.</p>
+        <span class="readmore">Read More →</span>
+      </a>
+    </div>
+    <div class="side-column">
+      <div class="card">
+        <a href="prepare-home-for-sale.html" class="card-link">
+          <img src="https://i.imgur.com/AZjeDnA.jpg" alt="Woman putting up a For Sale sign" class="card-img">
+          <h3 class="card-title">How to Prepare Your Home for Sale</h3>
+          <p class="card-text">A thoughtful approach to decluttering, styling, and emotionally transitioning your home — not just tidying it.</p>
+          <span class="readmore">Read More →</span>
+        </a>
+      </div>
+      <div class="card">
+        <a href="usda-loans-ocala.html" class="card-link">
+          <h3 class="card-title">USDA Loans in Ocala: Zero Down Options</h3>
+          <img src="https://i.imgur.com/o5Bh1wB.jpeg" alt="3D Zero percent sign" class="card-img">
+          <p class="card-text">Ocala is USDA-loan eligible — offering zero down payment financing and an accessible path to homeownership.</p>
+          <span class="readmore">Read More →</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-inner page-wrapper">
+    <div><a href="#">Accessibility</a> &nbsp;|&nbsp; <a href="#">Terms of Service</a> &nbsp;|&nbsp; <a href="#">Privacy Policy</a> &nbsp;|&nbsp; <a href="#">DMCA Notice</a> &nbsp;|&nbsp; <a href="#">Sitemap</a></div>
+    <div><img src="https://imgur.com/uwPw7OD.jpeg" alt="Equal Housing Opportunity" class="footer-logo"></div>
+    <div class="footer-copy">© 2025 Catalina Jimenez · eXp Realty · All Rights Reserved</div>
+  </div>
+</footer>
+
+<!-- VALUATION MODAL -->
+<div id="valuationModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6); z-index:9999; align-items:center; justify-content:center; padding:20px;">
+  <div style="background:#fff; border-radius:12px; max-width:520px; width:100%; padding:24px; position:relative; max-height:90vh; overflow:auto; font-family:'Segoe UI', sans-serif;">
+    <button onclick="document.getElementById('valuationModal').style.display='none'" type="button" style="position:absolute; top:12px; right:14px; background:none; border:none; font-size:22px; font-weight:700; cursor:pointer; color:#333;">×</button>
+    <h2 style="margin:0 0 10px; font-size:1.35rem; color:#222;">Request Your Free Home Evaluation</h2>
+    <p style="margin:0 0 16px; color:#666; line-height:1.4;">Fill this out and I'll follow up with a valuation and local comparables.</p>
+    <form action="https://formspree.io/f/mrebndrq" method="POST">
+      <input type="hidden" name="_subject" value="New Home Valuation Request (Website)" />
+      <label style="display:block; font-weight:700; color:#444; margin:10px 0 6px;">Full Name *</label>
+      <input type="text" name="name" required style="width:100%; padding:10px 12px; border:1px solid #ccc; border-radius:8px; font-size:1rem;">
+      <label style="display:block; font-weight:700; color:#444; margin:12px 0 6px;">Email *</label>
+      <input type="email" name="email" required style="width:100%; padding:10px 12px; border:1px solid #ccc; border-radius:8px; font-size:1rem;">
+      <label style="display:block; font-weight:700; color:#444; margin:12px 0 6px;">Phone</label>
+      <input type="tel" name="phone" style="width:100%; padding:10px 12px; border:1px solid #ccc; border-radius:8px; font-size:1rem;">
+      <label style="display:block; font-weight:700; color:#444; margin:12px 0 6px;">Property Address</label>
+      <input type="text" name="address" style="width:100%; padding:10px 12px; border:1px solid #ccc; border-radius:8px; font-size:1rem;">
+      <label style="display:block; font-weight:700; color:#444; margin:12px 0 6px;">Bedrooms</label>
+      <input type="number" name="bedrooms" min="0" style="width:100%; padding:10px 12px; border:1px solid #ccc; border-radius:8px; font-size:1rem;">
+      <label style="display:block; font-weight:700; color:#444; margin:12px 0 6px;">Bathrooms</label>
+      <input type="number" name="bathrooms" min="0" style="width:100%; padding:10px 12px; border:1px solid #ccc; border-radius:8px; font-size:1rem;">
+      <label style="display:block; font-weight:700; color:#444; margin:12px 0 6px;">Square Footage</label>
+      <input type="number" name="sqft" min="0" style="width:100%; padding:10px 12px; border:1px solid #ccc; border-radius:8px; font-size:1rem;">
+      <label style="display:block; font-weight:700; color:#444; margin:12px 0 6px;">Recent Renovations / Upgrades</label>
+      <textarea name="renovations" rows="3" style="width:100%; padding:10px 12px; border:1px solid #ccc; border-radius:8px; font-size:1rem; resize:vertical;"></textarea>
+      <button type="submit" style="width:100%; margin-top:16px; padding:12px; background:#0078d7; color:#fff; border:none; border-radius:8px; font-weight:800; cursor:pointer; font-size:1rem;">Submit</button>
+    </form>
+  </div>
+</div>
+
+<!-- SCHEDULER MODAL -->
+<div class="scheduler-overlay" id="schedulerModal" onclick="if(event.target===this) closeScheduler()">
+  <div class="scheduler-modal">
+    <button class="sched-close" onclick="closeScheduler()">✕</button>
+    <div class="sched-header">
+      <h3>Schedule a Call</h3>
+      <p>Pick a day and time — Catalina will confirm shortly</p>
+    </div>
+    <div class="sched-body" id="schedBooking">
+      <div class="sched-week-nav">
+        <button class="sched-week-btn" onclick="changeWeek(-1)">‹</button>
+        <span class="sched-week-label" id="weekLabel"></span>
+        <button class="sched-week-btn" onclick="changeWeek(1)">›</button>
+      </div>
+      <div class="sched-days" id="schedDays"></div>
+      <div class="sched-times-label">Available Times</div>
+      <div class="sched-slots" id="schedSlots"></div>
+      <button class="sched-confirm-btn" id="schedConfirmBtn" onclick="confirmBooking()" disabled>Select a time to continue</button>
+    </div>
+    <div class="sched-confirm-screen" id="schedConfirm">
+      <div class="sched-checkmark">✅</div>
+      <h3>You're all set!</h3>
+      <p>Catalina will reach out to confirm your call. Looking forward to speaking with you!</p>
+      <div class="sched-booked-slot" id="bookedSlotDisplay"></div>
+      <button class="sched-done-btn" onclick="closeScheduler()">Done</button>
+    </div>
+  </div>
+</div>
+
+<!-- POCKET LISTINGS MODAL -->
+<div class="pocket-overlay" id="pocketModal" onclick="if(event.target===this) closePocketListings()">
+  <div class="pocket-modal">
+    <button class="pocket-close" onclick="closePocketListings()">✕</button>
+    <div class="pocket-header">
+      <div class="pocket-accent">Off-Market · Exclusive</div>
+      <h3>Pocket Listings</h3>
+      <p>Request access to off-market properties — great for investors &amp; flippers</p>
+    </div>
+    <div class="pocket-body" id="pocketForm">
+      <form onsubmit="submitPocket(event)">
+        <div class="pocket-field">
+          <label class="pocket-label" for="pocketEmail">Your Email *</label>
+          <input type="email" id="pocketEmail" class="pocket-input" placeholder="you@example.com" required>
+        </div>
+        <div class="pocket-field">
+          <label class="pocket-label" for="pocketSubject">Subject *</label>
+          <input type="text" id="pocketSubject" class="pocket-input" placeholder="e.g. Looking for fix &amp; flip in Orlando under $350K" required>
+        </div>
+        <div class="pocket-field">
+          <label class="pocket-label" for="pocketMessage">Message</label>
+          <textarea id="pocketMessage" class="pocket-textarea" placeholder="Tell me what you're looking for — budget, area, property type, timeline…"></textarea>
+        </div>
+        <button type="submit" class="pocket-submit">Send Request →</button>
+      </form>
+    </div>
+    <div class="pocket-confirm" id="pocketConfirm">
+      <div class="pocket-confirm-icon">🔑</div>
+      <h3>Request Received!</h3>
+      <p>Catalina will be in touch shortly with off-market opportunities that match your criteria.</p>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT ME MODAL -->
+<div class="contactme-overlay" id="contactMeModal" onclick="if(event.target===this) closeContactMe()">
+  <div class="contactme-modal">
+    <button class="contactme-close" onclick="closeContactMe()">✕</button>
+    <div class="contactme-header">
+      <h3>Contact Catalina</h3>
+      <p>Reach out directly — happy to help!</p>
+    </div>
+    <div class="contactme-body">
+      <a href="mailto:catalina.jimenez.266454@exprealty.com" class="contactme-row">
+        <div class="contactme-row-icon">✉️</div>
+        <div class="contactme-row-text">
+          <span class="contactme-row-label">Email</span>
+          <span class="contactme-row-value">catalina.jimenez.266454@exprealty.com</span>
+        </div>
+      </a>
+      <a href="tel:+14075792670" class="contactme-row">
+        <div class="contactme-row-icon">📞</div>
+        <div class="contactme-row-text">
+          <span class="contactme-row-label">Phone</span>
+          <span class="contactme-row-value">(407) 579-2670</span>
+        </div>
+      </a>
+      <p class="contactme-tagline">Helping you find your dream home in Florida</p>
+    </div>
+  </div>
+</div>
+
+<script>
+  // SCHEDULER
+  let schedWeekOffset = 0, selectedDay = null, selectedSlot = null;
+  const BUSY_BY_DOW = { 0:[2,3,5,6,8,9], 1:[2,4,5,7,8], 2:[3,5,6,8,9], 3:[2,3,5,7,9], 4:[3,4,6,8,9], 5:[2,4,5,7,8], 6:[3,5,6,9] };
+  function getAllSlots() { const s=[]; for(let h=8;h<=20;h++){s.push({h,m:0});s.push({h,m:30});}s.push({h:21,m:0});return s; }
+  function formatSlot(h,m) { const ap=h<12?'AM':'PM',hr=h>12?h-12:(h===0?12:h); return `${hr}:${m===0?'00':m} ${ap}`; }
+  function isBusy(idx,dow) { const b=BUSY_BY_DOW[dow]||[]; if(idx>=2&&idx<=9)return b.includes(idx)||(idx%2===0&&!b.includes(idx-1)); return b.includes(idx%11); }
+  function getWeekDates(off) { const t=new Date(),m=new Date(t); m.setDate(t.getDate()-((t.getDay()+6)%7)+off*7); return Array.from({length:7},(_,i)=>{const d=new Date(m);d.setDate(m.getDate()+i);return d;}); }
+  function renderWeek() {
+    const days=getWeekDates(schedWeekOffset),today=new Date(),names=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],fmt={month:'short',day:'numeric'};
+    document.getElementById('weekLabel').textContent=days[0].toLocaleDateString('en-US',fmt)+' – '+days[6].toLocaleDateString('en-US',fmt);
+    const c=document.getElementById('schedDays'); c.innerHTML='';
+    days.forEach((d,i)=>{ const isT=d.toDateString()===today.toDateString(),isPast=d<today&&!isT,isSel=selectedDay&&d.toDateString()===selectedDay.toDateString();
+      const el=document.createElement('div'); el.className='sched-day'+(isT?' today':'')+(isSel?' selected':''); el.style.cssText=isPast?'opacity:0.3;pointer-events:none':'';
+      el.innerHTML=`<span class="day-name">${names[i]}</span><span class="day-num">${d.getDate()}</span>`;
+      el.onclick=()=>{selectedDay=d;selectedSlot=null;renderWeek();renderSlots();}; c.appendChild(el); });
+    renderSlots();
+  }
+  function renderSlots() {
+    const c=document.getElementById('schedSlots'),btn=document.getElementById('schedConfirmBtn'); c.innerHTML='';
+    if(!selectedDay){c.innerHTML='<div style="color:#bbb;font-size:0.82rem;grid-column:1/-1;padding:0.75rem 0">← Select a day first</div>';btn.disabled=true;btn.textContent='Select a time to continue';return;}
+    getAllSlots().forEach((s,idx)=>{ const busy=isBusy(idx,selectedDay.getDay()),isSel=selectedSlot&&selectedSlot.h===s.h&&selectedSlot.m===s.m;
+      const el=document.createElement('button'); el.className='slot-btn'+(busy?' busy':'')+(isSel?' selected':'');
+      el.textContent=busy?'—':formatSlot(s.h,s.m); el.disabled=busy;
+      if(!busy)el.onclick=()=>{selectedSlot=s;btn.disabled=false;btn.textContent=`Book ${formatSlot(s.h,s.m)} →`;renderSlots();}; c.appendChild(el); });
+  }
+  function confirmBooking() { if(!selectedDay||!selectedSlot)return; const ds=selectedDay.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'}); document.getElementById('bookedSlotDisplay').textContent=`📅 ${ds} at ${formatSlot(selectedSlot.h,selectedSlot.m)}`; document.getElementById('schedBooking').style.display='none'; document.getElementById('schedConfirm').classList.add('show'); }
+  function changeWeek(dir){if(schedWeekOffset+dir<0)return;schedWeekOffset+=dir;renderWeek();}
+  function openScheduler(){schedWeekOffset=0;selectedDay=null;selectedSlot=null;document.getElementById('schedBooking').style.display='block';document.getElementById('schedConfirm').classList.remove('show');document.getElementById('schedulerModal').classList.add('open');document.body.style.overflow='hidden';renderWeek();}
+  function closeScheduler(){document.getElementById('schedulerModal').classList.remove('open');document.body.style.overflow='';}
+
+  // POCKET LISTINGS
+  function openPocketListings(){document.getElementById('pocketForm').style.display='block';document.getElementById('pocketConfirm').classList.remove('show');document.getElementById('pocketModal').classList.add('open');document.body.style.overflow='hidden';}
+  function closePocketListings(){document.getElementById('pocketModal').classList.remove('open');document.body.style.overflow='';}
+  function submitPocket(e){
+    e.preventDefault();
+    const email=document.getElementById('pocketEmail').value, subject=document.getElementById('pocketSubject').value, message=document.getElementById('pocketMessage').value;
+    fetch('https://formspree.io/f/mrebndrq',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({_subject:'Pocket Listing Request: '+subject,email,subject,message})}).catch(()=>{});
+    document.getElementById('pocketForm').style.display='none';
+    document.getElementById('pocketConfirm').classList.add('show');
+  }
+
+  // CONTACT ME
+  function openContactMe(){document.getElementById('contactMeModal').classList.add('open');document.body.style.overflow='hidden';}
+  function closeContactMe(){document.getElementById('contactMeModal').classList.remove('open');document.body.style.overflow='';}
+
+  // ESC key closes all
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeScheduler();closePocketListings();closeContactMe();}});
+</script>
+</body>
+</html>
