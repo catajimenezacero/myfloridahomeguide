@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Psychology of Color in Home Design</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Cormorant+Garamond:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --serif: "Cormorant Garamond", serif; --sans: "Inter", sans-serif; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Space Grotesk', sans-serif; background: #fafafa; color: #1a1a1a; }
+
+        /* ── NAV ── */
+        .header-bar-container { width: 100%; border-bottom: 1px solid #e9e9e9; box-shadow: 0 4px 10px rgba(0,0,0,0.02); background: #fff; }
+        .page-wrapper { max-width: 1300px; margin: 0 auto; padding: 0 5vw; }
+        .blog-header { width: 100%; padding: 1.25rem 0; display: flex; justify-content: space-between; align-items: center; }
+        .header-logo { height: 42px; width: auto; display: block; }
+        .header-right { display: flex; align-items: center; gap: 2rem; font-size: 0.95rem; font-weight: 500; font-family: var(--sans); }
+        .nav-main { text-decoration: none; color: #333; transition: opacity 0.25s ease; }
+        .nav-main:hover { opacity: 0.6; }
+
+        .nav-dropdown { position: relative; }
+        .dropdown-menu { display: none; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); background: #fff; border: 1px solid #e9e9e9; border-radius: 12px; box-shadow: 0 12px 40px rgba(0,0,0,0.12); padding: 2rem 1.5rem 1.5rem; min-width: 520px; z-index: 1000; margin-top: -0.5rem; }
+        .nav-dropdown:hover .dropdown-menu { display: block; }
+        .dropdown-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 2rem; }
+        .dropdown-city { margin-bottom: 1.2rem; }
+        .dropdown-city-name { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #999; margin-bottom: 0.4rem; }
+        .dropdown-community { display: block; text-decoration: none; color: #222; font-size: 0.88rem; font-weight: 500; padding: 0.25rem 0; transition: color 0.2s; }
+        .dropdown-community:hover { color: #6fb1c6; }
+
+        .mega-menu { display: none; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); background: #fff; border: 1px solid #e9e9e9; border-radius: 12px; box-shadow: 0 12px 40px rgba(0,0,0,0.12); padding: 2rem 1.5rem 1.5rem; min-width: 300px; z-index: 1000; margin-top: -0.5rem; }
+        .nav-dropdown:hover .mega-menu { display: block; }
+        .mega-section-title { font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: #bbb; margin-bottom: 0.75rem; }
+        .mega-item { display: flex; align-items: center; gap: 0.85rem; padding: 0.6rem 0.5rem; border-radius: 8px; text-decoration: none; color: #1a1a1a; transition: background 0.15s; margin-bottom: 0.1rem; }
+        .mega-item:hover { background: #f7f5f2; }
+        .mega-icon { width: 36px; height: 36px; border-radius: 8px; background: #f0ede8; display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; }
+        .mega-item-label { font-size: 0.88rem; font-weight: 600; color: #1a1a1a; display: block; line-height: 1.2; }
+        .mega-item-desc { font-size: 0.75rem; color: #888; margin-top: 0.1rem; display: block; }
+
+        /* MODALS */
+        @keyframes modalPop { from { transform: translateY(20px) scale(0.97); opacity: 0; } to { transform: none; opacity: 1; } }
+        .scheduler-overlay, .pocket-overlay, .contactme-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.55); z-index: 9999; align-items: center; justify-content: center; padding: 1rem; }
+        .scheduler-overlay.open, .pocket-overlay.open, .contactme-overlay.open { display: flex; }
+        .scheduler-modal { background: #fff; border-radius: 18px; box-shadow: 0 30px 80px rgba(0,0,0,0.2); width: 100%; max-width: 520px; overflow: hidden; animation: modalPop 0.3s cubic-bezier(0.34,1.56,0.64,1); position: relative; }
+        .sched-header { background: #1a1a1a; color: #fff; padding: 1.5rem 1.75rem 1.25rem; }
+        .sched-header h3 { font-family: var(--serif); font-size: 1.5rem; font-weight: 700; margin-bottom: 0.2rem; }
+        .sched-header p { font-size: 0.82rem; color: rgba(255,255,255,0.55); }
+        .sched-close, .pocket-close, .contactme-close { position: absolute; top: 1rem; right: 1.25rem; background: rgba(255,255,255,0.12); border: none; color: #fff; width: 30px; height: 30px; border-radius: 50%; font-size: 1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+        .sched-body { padding: 1.5rem 1.75rem 1.75rem; }
+        .sched-week-nav { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; }
+        .sched-week-label { font-size: 0.88rem; font-weight: 600; color: #333; }
+        .sched-week-btn { background: #f5f5f5; border: none; border-radius: 6px; width: 30px; height: 30px; cursor: pointer; font-size: 1rem; display: flex; align-items: center; justify-content: center; }
+        .sched-days { display: grid; grid-template-columns: repeat(7, 1fr); gap: 0.4rem; margin-bottom: 1.25rem; }
+        .sched-day { display: flex; flex-direction: column; align-items: center; gap: 0.2rem; padding: 0.5rem 0.2rem; border-radius: 10px; border: 1.5px solid #eee; cursor: pointer; transition: all 0.15s; background: #fff; }
+        .sched-day:hover { border-color: #1a1a1a; }
+        .sched-day.selected { background: #1a1a1a; border-color: #1a1a1a; }
+        .sched-day.today .day-num { color: #c8a96e; font-weight: 700; }
+        .sched-day.selected .day-num, .sched-day.selected .day-name { color: #fff; }
+        .day-name { font-size: 0.62rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: #aaa; }
+        .day-num { font-size: 0.95rem; font-weight: 700; color: #1a1a1a; }
+        .sched-times-label { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #bbb; margin-bottom: 0.75rem; }
+        .sched-slots { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; max-height: 220px; overflow-y: auto; }
+        .slot-btn { padding: 0.55rem 0.5rem; border-radius: 8px; border: 1.5px solid #eee; background: #fff; font-family: var(--sans); font-size: 0.8rem; font-weight: 500; color: #333; cursor: pointer; transition: all 0.15s; text-align: center; }
+        .slot-btn:hover { border-color: #1a1a1a; }
+        .slot-btn.busy { background: #fafafa; color: #ccc; border-color: #f0f0f0; cursor: not-allowed; }
+        .slot-btn.selected { background: #1a1a1a; border-color: #1a1a1a; color: #fff; }
+        .sched-confirm-btn { width: 100%; margin-top: 1.25rem; padding: 0.85rem; background: #1a1a1a; color: #fff; border: none; border-radius: 10px; font-family: var(--sans); font-size: 0.9rem; font-weight: 700; cursor: pointer; }
+        .sched-confirm-btn:disabled { background: #ccc; cursor: not-allowed; }
+        .sched-confirm-screen { display: none; padding: 2.5rem 1.75rem; text-align: center; }
+        .sched-confirm-screen.show { display: block; }
+        .sched-checkmark { font-size: 3rem; margin-bottom: 1rem; }
+        .sched-confirm-screen h3 { font-family: var(--serif); font-size: 1.6rem; font-weight: 700; margin-bottom: 0.5rem; }
+        .sched-confirm-screen p { color: #666; font-size: 0.92rem; line-height: 1.6; margin-bottom: 1.5rem; }
+        .sched-booked-slot { background: #f7f5f2; border-radius: 10px; padding: 1rem; font-size: 0.9rem; font-weight: 600; color: #1a1a1a; margin-bottom: 1.5rem; }
+        .sched-done-btn { padding: 0.75rem 2rem; background: #1a1a1a; color: #fff; border: none; border-radius: 8px; font-family: var(--sans); font-size: 0.88rem; font-weight: 700; cursor: pointer; }
+        .pocket-modal { background: #fff; border-radius: 18px; box-shadow: 0 30px 80px rgba(0,0,0,0.2); width: 100%; max-width: 480px; max-height: 90vh; overflow-y: auto; animation: modalPop 0.3s cubic-bezier(0.34,1.56,0.64,1); position: relative; }
+        .pocket-header { background: #1a1a1a; padding: 1.5rem 1.75rem 1.25rem; position: relative; }
+        .pocket-header h3 { font-family: var(--serif); font-size: 1.5rem; font-weight: 700; color: #fff; margin-bottom: 0.2rem; }
+        .pocket-header p { font-size: 0.82rem; color: rgba(255,255,255,0.5); }
+        .pocket-accent { display: inline-block; background: #c8a96e; color: #fff; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.2rem 0.6rem; border-radius: 100px; margin-bottom: 0.6rem; }
+        .pocket-body { padding: 1.75rem; }
+        .pocket-field { margin-bottom: 1.1rem; }
+        .pocket-label { display: block; font-size: 0.78rem; font-weight: 700; color: #444; margin-bottom: 0.4rem; text-transform: uppercase; letter-spacing: 0.06em; }
+        .pocket-input { width: 100%; padding: 0.7rem 0.9rem; border: 1.5px solid #e5e5e5; border-radius: 8px; font-family: var(--sans); font-size: 0.9rem; color: #222; outline: none; }
+        .pocket-input:focus { border-color: #1a1a1a; }
+        .pocket-textarea { width: 100%; padding: 0.7rem 0.9rem; border: 1.5px solid #e5e5e5; border-radius: 8px; font-family: var(--sans); font-size: 0.9rem; color: #222; outline: none; resize: vertical; min-height: 110px; }
+        .pocket-textarea:focus { border-color: #1a1a1a; }
+        .pocket-submit { width: 100%; padding: 0.85rem; background: #1a1a1a; color: #fff; border: none; border-radius: 10px; font-family: var(--sans); font-size: 0.9rem; font-weight: 700; cursor: pointer; margin-top: 0.25rem; }
+        .pocket-confirm { display: none; padding: 2.5rem 1.75rem; text-align: center; }
+        .pocket-confirm.show { display: block; }
+        .pocket-confirm-icon { font-size: 2.8rem; margin-bottom: 1rem; }
+        .pocket-confirm h3 { font-family: var(--serif); font-size: 1.6rem; font-weight: 700; margin-bottom: 0.5rem; }
+        .pocket-confirm p { color: #666; font-size: 0.9rem; line-height: 1.6; }
+        .contactme-modal { background: #fff; border-radius: 18px; box-shadow: 0 30px 80px rgba(0,0,0,0.2); width: 100%; max-width: 420px; overflow: hidden; animation: modalPop 0.3s cubic-bezier(0.34,1.56,0.64,1); position: relative; }
+        .contactme-header { background: #1a1a1a; padding: 1.5rem 1.75rem 1.35rem; position: relative; }
+        .contactme-header h3 { font-family: var(--serif); font-size: 1.5rem; font-weight: 700; color: #fff; margin-bottom: 0.2rem; }
+        .contactme-header p { font-size: 0.82rem; color: rgba(255,255,255,0.5); }
+        .contactme-body { padding: 1.75rem; display: flex; flex-direction: column; gap: 1rem; }
+        .contactme-row { display: flex; align-items: center; gap: 1rem; padding: 1rem 1.1rem; border-radius: 12px; background: #f7f5f2; text-decoration: none; color: #1a1a1a; transition: background 0.15s; min-width: 0; }
+        .contactme-row:hover { background: #efefeb; }
+        .contactme-row-icon { width: 42px; height: 42px; border-radius: 10px; background: #1a1a1a; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
+        .contactme-row-text { flex: 1; min-width: 0; }
+        .contactme-row-label { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #aaa; display: block; margin-bottom: 0.2rem; }
+        .contactme-row-value { font-size: 0.82rem; font-weight: 600; color: #1a1a1a; display: block; word-break: break-all; }
+        .contactme-tagline { text-align: center; font-style: italic; font-size: 0.78rem; color: #bbb; padding-bottom: 0.25rem; }
+
+        /* ── ARTICLE STYLES ── */
+        .hero-section { background: #ffffff; color: #1a1a1a; padding: 80px 20px 80px; text-align: left; position: relative; border-bottom: 1px solid #e5e5e5; }
+        .hero-content { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+        .hero-text { padding-right: 40px; }
+        .hero-title { font-family: 'Space Grotesk', sans-serif; font-size: 4.5rem; font-weight: 700; margin-bottom: 30px; line-height: 0.9; letter-spacing: -0.02em; color: #1a1a1a; }
+        .hero-subtitle { font-family: 'Crimson Text', serif; font-size: 1.4rem; line-height: 1.6; color: #666; margin-bottom: 40px; }
+        .hero-meta { display: flex; gap: 30px; font-size: 0.9rem; color: #999; text-transform: uppercase; letter-spacing: 0.1em; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 80px 20px; }
+        .hero-image { width: 100%; height: 500px; object-fit: cover; border-radius: 0; margin: 0; }
+        .article-image { width: 100%; height: 600px; object-fit: cover; border-radius: 0; margin: 80px 0; display: block; transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.3s ease; box-shadow: 0 4px 14px rgba(0,0,0,0.08); -webkit-user-drag: none; user-select: none; }
+        .article-image:hover { transform: scale(1.035); box-shadow: 0 8px 28px rgba(0,0,0,0.18); cursor: pointer; }
+        .intro-text { font-family: 'Crimson Text', serif; font-size: 1.5rem; line-height: 1.7; color: #333; margin: 80px 0; max-width: 800px; font-style: italic; }
+        .colors-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2px; margin: 80px 0; background: #e5e5e5; }
+        .color-section { background: white; padding: 60px 40px; position: relative; transition: all 0.3s ease; }
+        .color-section:hover { background: #f8f8f8; }
+        .color-number { font-family: 'Space Grotesk', sans-serif; font-size: 1rem; font-weight: 600; color: #999; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 0.1em; }
+        .color-title { font-family: 'Space Grotesk', sans-serif; font-size: 1.8rem; font-weight: 600; margin-bottom: 20px; color: #1a1a1a; line-height: 1.2; }
+        .color-text { font-family: 'Crimson Text', serif; font-size: 1.1rem; line-height: 1.6; color: #666; }
+        .color-accent { position: absolute; top: 0; left: 0; width: 4px; height: 100%; }
+        .blue .color-accent { background: #2563eb; }
+        .yellow .color-accent { background: #eab308; }
+        .green .color-accent { background: #16a34a; }
+        .pink .color-accent { background: #ec4899; }
+        .red .color-accent { background: #dc2626; }
+        .neutral .color-accent { background: #6b7280; }
+        .monochrome .color-accent { background: #1f2937; }
+        .tips-section { background: #1a1a1a; color: white; padding: 100px 0; margin: 80px 0; }
+        .tips-container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        .tips-title { font-family: 'Space Grotesk', sans-serif; font-size: 3rem; font-weight: 700; margin-bottom: 60px; text-align: center; line-height: 1.1; }
+        .tips-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2px; background: #333; }
+        .tip-card { background: #1a1a1a; padding: 40px; transition: background 0.3s ease; }
+        .tip-card:hover { background: #2a2a2a; }
+        .tip-number { font-family: 'Space Grotesk', sans-serif; font-size: 0.9rem; font-weight: 600; color: #666; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 0.1em; }
+        .tip-card h4 { font-family: 'Space Grotesk', sans-serif; font-size: 1.4rem; font-weight: 600; margin-bottom: 15px; color: #fff; line-height: 1.2; }
+        .tip-card p { font-family: 'Crimson Text', serif; font-size: 1.1rem; line-height: 1.6; margin: 0; color: #ccc; }
+        .cta-section { text-align: center; padding: 100px 40px; background: white; margin: 80px 0; border-top: 1px solid #e5e5e5; border-bottom: 1px solid #e5e5e5; }
+        .cta-text { font-family: 'Crimson Text', serif; font-size: 1.3rem; font-weight: 400; color: #666; line-height: 1.6; max-width: 600px; margin: 0 auto; font-style: italic; }
+
+        @media (max-width: 768px) {
+            .hero-content { grid-template-columns: 1fr; gap: 40px; text-align: center; }
+            .hero-text { padding-right: 0; }
+            .hero-title { font-size: 3rem; }
+            .container { padding: 40px 15px; }
+            .colors-grid { grid-template-columns: 1fr; }
+            .color-section { padding: 40px 30px; }
+            .tips-section { padding: 60px 0; }
+            .tips-container { padding: 0 15px; }
+            .tips-title { font-size: 2.2rem; }
+            .tips-grid { grid-template-columns: 1fr; }
+            .header-right { gap: 1rem; font-size: 0.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ── CONSISTENT NAV ── -->
+<div class="header-bar-container">
+  <div class="page-wrapper">
+    <header class="blog-header">
+      <div class="header-left">
+        <a href="https://catalinajimenezfl.exprealty.com"><img src="https://imgur.com/5rAwWDG.jpeg" alt="eXp Realty Logo" class="header-logo"></a>
+      </div>
+      <nav class="header-right">
+        <a href="https://catalinajimenezfl.exprealty.com/index.php?homesearchmore=1#advanced_search_form" class="nav-main">Search</a>
+        <a href="#" class="nav-main" onclick="document.getElementById('valuationModal').style.display='flex'; return false;">Sell</a>
+
+        <div class="nav-dropdown">
+          <a href="new-construction.html" class="nav-main" style="line-height:1.2; text-align:center; text-decoration:none;">New Construction<br>Communities ▾</a>
+          <div class="dropdown-menu">
+            <div class="dropdown-grid">
+              <div class="dropdown-city"><div class="dropdown-city-name">St. Cloud</div><a href="new-construction.html#st-cloud" class="dropdown-community">Sunbridge</a><a href="new-construction.html#st-cloud" class="dropdown-community">The Meadow at Crossprairie</a><a href="new-construction.html#st-cloud" class="dropdown-community">Brack Ranch</a></div>
+              <div class="dropdown-city"><div class="dropdown-city-name">Winter Garden</div><a href="new-construction.html#winter-garden" class="dropdown-community">Serenade at Ovation</a><a href="new-construction.html#winter-garden" class="dropdown-community">Waterleigh</a></div>
+              <div class="dropdown-city"><div class="dropdown-city-name">Winter Haven</div><a href="new-construction.html#winter-haven" class="dropdown-community">Annabelle Estates</a></div>
+              <div class="dropdown-city"><div class="dropdown-city-name">Minneola</div><a href="new-construction.html#minneola" class="dropdown-community">Hills of Minneola</a><a href="new-construction.html#minneola" class="dropdown-community">Parkview at the Hills</a></div>
+              <div class="dropdown-city"><div class="dropdown-city-name">Apopka</div><a href="new-construction.html#apopka" class="dropdown-community">Crossroads at Kelly Park</a><a href="new-construction.html#apopka" class="dropdown-community">Oakview</a></div>
+              <div class="dropdown-city"><div class="dropdown-city-name">Clermont</div><a href="new-construction.html#clermont" class="dropdown-community">Cagan Crossings West</a><a href="new-construction.html#clermont" class="dropdown-community">Ridgeview</a></div>
+              <div class="dropdown-city"><div class="dropdown-city-name">Davenport</div><a href="new-construction.html#davenport" class="dropdown-community">Preservation Pointe</a><a href="new-construction.html#davenport" class="dropdown-community">Horse Creek</a></div>
+              <div class="dropdown-city"><div class="dropdown-city-name">Ocala</div><a href="new-construction.html#ocala" class="dropdown-community">Aurora Oaks</a><a href="new-construction.html#ocala" class="dropdown-community">Cherrywood Preserve</a></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="nav-dropdown">
+          <a href="#" class="nav-main">Other ▾</a>
+          <div class="mega-menu" style="min-width:310px;">
+            <div class="mega-section-title">More from Catalina</div>
+            <a href="#" onclick="openPocketListings(); return false;" class="mega-item"><div class="mega-icon">🏡</div><div><span class="mega-item-label">Pocket Listings</span><span class="mega-item-desc">Off-market properties for investors &amp; flippers</span></div></a>
+            <a href="#" onclick="openScheduler(); return false;" class="mega-item"><div class="mega-icon">📅</div><div><span class="mega-item-label">Schedule a Call</span><span class="mega-item-desc">Pick an available time to talk</span></div></a>
+            <a href="#" onclick="openContactMe(); return false;" class="mega-item"><div class="mega-icon">✉️</div><div><span class="mega-item-label">Contact Me</span><span class="mega-item-desc">Email or call Catalina directly</span></div></a>
+          </div>
+        </div>
+
+        <div class="nav-dropdown">
+          <a href="#" class="nav-main">Resources ▾</a>
+          <div class="mega-menu" style="min-width:310px; right:0; left:auto; transform:none;">
+            <div class="mega-section-title">Buyer &amp; Seller Resources</div>
+            <a href="usda-loans-ocala.html" class="mega-item"><div class="mega-icon">🏦</div><div><span class="mega-item-label">USDA Loans in Ocala</span><span class="mega-item-desc">Zero down payment options explained</span></div></a>
+            <a href="prepare-home-for-sale.html" class="mega-item"><div class="mega-icon">🔑</div><div><span class="mega-item-label">Prepare to Sell</span><span class="mega-item-desc">Get the best price for your home</span></div></a>
+            <a href="https://catalinajimenezfl.exprealty.com/mortgage-calculator/" target="_blank" class="mega-item"><div class="mega-icon">🧮</div><div><span class="mega-item-label">Mortgage Calculator</span><span class="mega-item-desc">Estimate your monthly payments</span></div></a>
+            <a href="color-psychology.html" class="mega-item"><div class="mega-icon">🎨</div><div><span class="mega-item-label">Design &amp; Staging Tips</span><span class="mega-item-desc">Present your home beautifully</span></div></a>
+          </div>
+        </div>
+      </nav>
+    </header>
+  </div>
+</div>
+
+<!-- ── ARTICLE HERO ── -->
+<header class="hero-section">
+    <div class="hero-content">
+        <div class="hero-text">
+            <h1 class="hero-title">The Psychology of Color</h1>
+            <p class="hero-subtitle">Designing a Home That Feels Just Right</p>
+            <div class="hero-meta">
+                <span>Interior Design</span>
+                <span>Psychology</span>
+                <span>5 Min Read</span>
+            </div>
+        </div>
+        <div class="hero-image-container">
+            <a href="https://www.etsy.com/listing/1857109530/pink-psychedelic-area-rug-abstract?ls=a&ga_order=most_relevant&ga_search_type=all&ga_view_type=gallery&ga_search_query=large+bedroom+print&ref=sc_gallery-1-1&sr_prefetch=0&pro=1&frs=1&nob=1&plkey=ccc4bc35c949ec188d7331a6f55f1ee89d39c75a%3A1857109530&epik=dj0yJnU9T1RISUg5X1NKVTlGOEc3SElfdU9kUGx5ZjBnRUxwa1EmcD0wJm49TGMxdnFoZGpXMUMwM1ZxLUFFV3E5USZ0PUFBQUFBR2oyY1VN" target="_blank" rel="noopener noreferrer">
+                <img src="https://i.imgur.com/5TfB9c0.jpeg" alt="Pink Psychedelic Area Rug – Abstract design" class="hero-image" draggable="false">
+            </a>
+        </div>
+    </div>
+</header>
+
+<!-- ── ARTICLE CONTENT ── -->
+<main class="container">
+    <div class="intro-text">
+        Color doesn't just change how your home looks — it transforms how it <em>feels</em>. Whether you're seeking calm, creativity, energy, or elegance, understanding color psychology helps you create spaces that truly support your lifestyle and mood.
+    </div>
+    <div class="colors-grid">
+        <section class="color-section blue"><div class="color-accent"></div><div class="color-number">01</div><h3 class="color-title">Blue: Calm, Focus, and Serenity</h3><p class="color-text">Ideal for bedrooms, offices, or bathrooms, <strong>blue</strong> tones are known to lower heart rate and blood pressure. Use light blues for a spa-like feel, or deeper navy for richness and sophistication.</p></section>
+        <section class="color-section yellow"><div class="color-accent"></div><div class="color-number">02</div><h3 class="color-title">Yellow: Energy, Optimism, and Joy</h3><p class="color-text"><strong>Yellow</strong> is cheerful and uplifting — perfect for kitchens, breakfast nooks, or small entryways. Use it in moderation: soft buttery yellows feel cozy, while bold sunshine tones can get overwhelming if overused.</p></section>
+        <section class="color-section green"><div class="color-accent"></div><div class="color-number">03</div><h3 class="color-title">Green: Balance, Growth, and Harmony</h3><p class="color-text">A versatile choice for almost any room, <strong>green</strong> represents nature and renewal. Sage greens are soothing in bedrooms or bathrooms, while deeper forest greens create a grounding effect in living rooms.</p></section>
+        <section class="color-section pink"><div class="color-accent"></div><div class="color-number">04</div><h3 class="color-title">Pink: Comfort, Playfulness, and Romance</h3><p class="color-text">From soft blush to bold magenta, <strong>pink</strong> adds personality. Pale pink creates a calming ambiance, while brighter tones add bold character to creative spaces or fun guest rooms.</p></section>
+        <section class="color-section red"><div class="color-accent"></div><div class="color-number">05</div><h3 class="color-title">Red: Passion, Warmth, and Energy</h3><p class="color-text"><strong>Red</strong> increases heart rate and energy — great for dining rooms or entertaining spaces where lively conversation is key. Deep burgundy adds elegance, while bright reds make a strong statement.</p></section>
+        <section class="color-section neutral"><div class="color-accent"></div><div class="color-number">06</div><h3 class="color-title">Neutrals: Simplicity, Versatility, and Calm</h3><p class="color-text"><strong>Beige, ivory, taupe, and grey</strong> act as foundations for layering. They're ideal for open spaces, letting furniture or art take the spotlight. Mix warm and cool tones for depth and interest.</p></section>
+        <section class="color-section monochrome"><div class="color-accent"></div><div class="color-number">07</div><h3 class="color-title">Black &amp; White: Bold Contrast and Timeless Elegance</h3><p class="color-text">Use <strong>black</strong> to ground a room and add drama; use <strong>white</strong> for cleanliness and airiness. Together, they create crisp contrast and a classic, modern feel.</p></section>
+    </div>
+    <img src="https://i.imgur.com/evrwbdu.jpeg" alt="Interior styled rug in modern living room" class="article-image">
+</main>
+
+<section class="tips-section">
+    <div class="tips-container">
+        <h3 class="tips-title">How to Apply Color Psychology in Your Home</h3>
+        <div class="tips-grid">
+            <div class="tip-card"><div class="tip-number">Step 01</div><h4>Start with emotion</h4><p>Ask yourself how you want to feel in each space — energized, relaxed, inspired?</p></div>
+            <div class="tip-card"><div class="tip-number">Step 02</div><h4>Balance bold and subtle</h4><p>Use vibrant colors as accents (pillows, rugs, art), and neutrals for balance.</p></div>
+            <div class="tip-card"><div class="tip-number">Step 03</div><h4>Test before you commit</h4><p>Paint swatches on your wall and see them in natural light throughout the day.</p></div>
+            <div class="tip-card"><div class="tip-number">Step 04</div><h4>Let your personality shine</h4><p>Color is deeply personal — trust your gut and don't be afraid to break rules.</p></div>
+        </div>
+    </div>
+</section>
+
+<section class="cta-section">
+    <p class="cta-text">Design your home with intention — color is more than just style. It's energy. It's mood. It's you.</p>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer style="width:100%;background:#fff;padding:2rem 0;border-top:1px solid #e5e5e5;display:flex;justify-content:center;">
+  <div style="width:100%;max-width:1300px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:0.75rem;padding:0 5vw;">
+    <div><a href="#" style="color:#444;text-decoration:none;font-size:0.9rem;">Accessibility</a> &nbsp;|&nbsp; <a href="#" style="color:#444;text-decoration:none;font-size:0.9rem;">Terms of Service</a> &nbsp;|&nbsp; <a href="#" style="color:#444;text-decoration:none;font-size:0.9rem;">Privacy Policy</a> &nbsp;|&nbsp; <a href="#" style="color:#444;text-decoration:none;font-size:0.9rem;">DMCA Notice</a> &nbsp;|&nbsp; <a href="#" style="color:#444;text-decoration:none;font-size:0.9rem;">Sitemap</a></div>
+    <div><img src="https://imgur.com/uwPw7OD.jpeg" alt="Equal Housing Opportunity" style="height:38px;width:auto;"></div>
+    <div style="font-size:0.85rem;color:#777;">© 2025 Catalina Jimenez · eXp Realty · All Rights Reserved</div>
+  </div>
+</footer>
+
+<!-- ── VALUATION MODAL ── -->
+<div id="valuationModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6); z-index:9999; align-items:center; justify-content:center; padding:20px;">
+  <div style="background:#fff; border-radius:12px; max-width:520px; width:100%; padding:24px; position:relative; max-height:90vh; overflow:auto; font-family:'Inter', sans-serif;">
+    <button onclick="document.getElementById('valuationModal').style.display='none'" type="button" style="position:absolute; top:12px; right:14px; background:none; border:none; font-size:22px; font-weight:700; cursor:pointer; color:#333;">×</button>
+    <h2 style="margin:0 0 10px; font-size:1.35rem; color:#222;">Request Your Free Home Evaluation</h2>
+    <p style="margin:0 0 16px; color:#666; line-height:1.4;">Fill this out and I'll follow up with a valuation and local comparables.</p>
+    <form action="https://formspree.io/f/mrebndrq" method="POST">
+      <input type="hidden" name="_subject" value="New Home Valuation Request (Website)" />
+      <label style="display:block;font-weight:700;color:#444;margin:10px 0 6px;">Full Name *</label><input type="text" name="name" required style="width:100%;padding:10px 12px;border:1px solid #ccc;border-radius:8px;font-size:1rem;">
+      <label style="display:block;font-weight:700;color:#444;margin:12px 0 6px;">Email *</label><input type="email" name="email" required style="width:100%;padding:10px 12px;border:1px solid #ccc;border-radius:8px;font-size:1rem;">
+      <label style="display:block;font-weight:700;color:#444;margin:12px 0 6px;">Phone</label><input type="tel" name="phone" style="width:100%;padding:10px 12px;border:1px solid #ccc;border-radius:8px;font-size:1rem;">
+      <label style="display:block;font-weight:700;color:#444;margin:12px 0 6px;">Property Address</label><input type="text" name="address" style="width:100%;padding:10px 12px;border:1px solid #ccc;border-radius:8px;font-size:1rem;">
+      <label style="display:block;font-weight:700;color:#444;margin:12px 0 6px;">Bedrooms</label><input type="number" name="bedrooms" min="0" style="width:100%;padding:10px 12px;border:1px solid #ccc;border-radius:8px;font-size:1rem;">
+      <label style="display:block;font-weight:700;color:#444;margin:12px 0 6px;">Bathrooms</label><input type="number" name="bathrooms" min="0" style="width:100%;padding:10px 12px;border:1px solid #ccc;border-radius:8px;font-size:1rem;">
+      <label style="display:block;font-weight:700;color:#444;margin:12px 0 6px;">Square Footage</label><input type="number" name="sqft" min="0" style="width:100%;padding:10px 12px;border:1px solid #ccc;border-radius:8px;font-size:1rem;">
+      <label style="display:block;font-weight:700;color:#444;margin:12px 0 6px;">Recent Renovations / Upgrades</label><textarea name="renovations" rows="3" style="width:100%;padding:10px 12px;border:1px solid #ccc;border-radius:8px;font-size:1rem;resize:vertical;"></textarea>
+      <button type="submit" style="width:100%;margin-top:16px;padding:12px;background:#0078d7;color:#fff;border:none;border-radius:8px;font-weight:800;cursor:pointer;font-size:1rem;">Submit</button>
+    </form>
+  </div>
+</div>
+
+<!-- ── SCHEDULER MODAL ── -->
+<div class="scheduler-overlay" id="schedulerModal" onclick="if(event.target===this) closeScheduler()">
+  <div class="scheduler-modal">
+    <button class="sched-close" onclick="closeScheduler()">✕</button>
+    <div class="sched-header"><h3>Schedule a Call</h3><p>Pick a day and time — Catalina will confirm shortly</p></div>
+    <div class="sched-body" id="schedBooking">
+      <div class="sched-week-nav"><button class="sched-week-btn" onclick="changeWeek(-1)">‹</button><span class="sched-week-label" id="weekLabel"></span><button class="sched-week-btn" onclick="changeWeek(1)">›</button></div>
+      <div class="sched-days" id="schedDays"></div>
+      <div class="sched-times-label">Available Times</div>
+      <div class="sched-slots" id="schedSlots"></div>
+      <button class="sched-confirm-btn" id="schedConfirmBtn" onclick="confirmBooking()" disabled>Select a time to continue</button>
+    </div>
+    <div class="sched-confirm-screen" id="schedConfirm">
+      <div class="sched-checkmark">✅</div><h3>You're all set!</h3>
+      <p>Catalina will reach out to confirm your call. Looking forward to speaking with you!</p>
+      <div class="sched-booked-slot" id="bookedSlotDisplay"></div>
+      <button class="sched-done-btn" onclick="closeScheduler()">Done</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── POCKET LISTINGS MODAL ── -->
+<div class="pocket-overlay" id="pocketModal" onclick="if(event.target===this) closePocketListings()">
+  <div class="pocket-modal">
+    <button class="pocket-close" onclick="closePocketListings()">✕</button>
+    <div class="pocket-header"><div class="pocket-accent">Off-Market · Exclusive</div><h3>Pocket Listings</h3><p>Request access to off-market properties — great for investors &amp; flippers</p></div>
+    <div class="pocket-body" id="pocketForm">
+      <form onsubmit="submitPocket(event)">
+        <div class="pocket-field"><label class="pocket-label" for="pocketEmail">Your Email *</label><input type="email" id="pocketEmail" class="pocket-input" placeholder="you@example.com" required></div>
+        <div class="pocket-field"><label class="pocket-label" for="pocketSubject">Subject *</label><input type="text" id="pocketSubject" class="pocket-input" placeholder="e.g. Looking for fix &amp; flip in Orlando under $350K" required></div>
+        <div class="pocket-field"><label class="pocket-label" for="pocketMessage">Message</label><textarea id="pocketMessage" class="pocket-textarea" placeholder="Tell me what you're looking for — budget, area, property type, timeline…"></textarea></div>
+        <button type="submit" class="pocket-submit">Send Request →</button>
+      </form>
+    </div>
+    <div class="pocket-confirm" id="pocketConfirm"><div class="pocket-confirm-icon">🔑</div><h3>Request Received!</h3><p>Catalina will be in touch shortly with off-market opportunities that match your criteria.</p></div>
+  </div>
+</div>
+
+<!-- ── CONTACT ME MODAL ── -->
+<div class="contactme-overlay" id="contactMeModal" onclick="if(event.target===this) closeContactMe()">
+  <div class="contactme-modal">
+    <button class="contactme-close" onclick="closeContactMe()">✕</button>
+    <div class="contactme-header"><h3>Contact Catalina</h3><p>Reach out directly — happy to help!</p></div>
+    <div class="contactme-body">
+      <a href="mailto:catalina.jimenez.266454@exprealty.com" class="contactme-row">
+        <div class="contactme-row-icon">✉️</div>
+        <div class="contactme-row-text"><span class="contactme-row-label">Email</span><span class="contactme-row-value">catalina.jimenez.266454@exprealty.com</span></div>
+      </a>
+      <a href="tel:+14075792670" class="contactme-row">
+        <div class="contactme-row-icon">📞</div>
+        <div class="contactme-row-text"><span class="contactme-row-label">Phone</span><span class="contactme-row-value">(407) 579-2670</span></div>
+      </a>
+      <p class="contactme-tagline">Helping you find your dream home in Florida</p>
+    </div>
+  </div>
+</div>
+
+<script>
+  // SCHEDULER
+  let schedWeekOffset=0,selectedDay=null,selectedSlot=null;
+  const BUSY_BY_DOW={0:[2,3,5,6,8,9],1:[2,4,5,7,8],2:[3,5,6,8,9],3:[2,3,5,7,9],4:[3,4,6,8,9],5:[2,4,5,7,8],6:[3,5,6,9]};
+  function getAllSlots(){const s=[];for(let h=8;h<=20;h++){s.push({h,m:0});s.push({h,m:30});}s.push({h:21,m:0});return s;}
+  function formatSlot(h,m){const ap=h<12?'AM':'PM',hr=h>12?h-12:(h===0?12:h);return `${hr}:${m===0?'00':m} ${ap}`;}
+  function isBusy(idx,dow){const b=BUSY_BY_DOW[dow]||[];if(idx>=2&&idx<=9)return b.includes(idx)||(idx%2===0&&!b.includes(idx-1));return b.includes(idx%11);}
+  function getWeekDates(off){const t=new Date(),m=new Date(t);m.setDate(t.getDate()-((t.getDay()+6)%7)+off*7);return Array.from({length:7},(_,i)=>{const d=new Date(m);d.setDate(m.getDate()+i);return d;});}
+  function renderWeek(){
+    const days=getWeekDates(schedWeekOffset),today=new Date(),names=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],fmt={month:'short',day:'numeric'};
+    document.getElementById('weekLabel').textContent=days[0].toLocaleDateString('en-US',fmt)+' – '+days[6].toLocaleDateString('en-US',fmt);
+    const c=document.getElementById('schedDays');c.innerHTML='';
+    days.forEach((d,i)=>{const isT=d.toDateString()===today.toDateString(),isPast=d<today&&!isT,isSel=selectedDay&&d.toDateString()===selectedDay.toDateString();
+      const el=document.createElement('div');el.className='sched-day'+(isT?' today':'')+(isSel?' selected':'');el.style.cssText=isPast?'opacity:0.3;pointer-events:none':'';
+      el.innerHTML=`<span class="day-name">${names[i]}</span><span class="day-num">${d.getDate()}</span>`;
+      el.onclick=()=>{selectedDay=d;selectedSlot=null;renderWeek();renderSlots();};c.appendChild(el);});
+    renderSlots();
+  }
+  function renderSlots(){
+    const c=document.getElementById('schedSlots'),btn=document.getElementById('schedConfirmBtn');c.innerHTML='';
+    if(!selectedDay){c.innerHTML='<div style="color:#bbb;font-size:0.82rem;grid-column:1/-1;padding:0.75rem 0">← Select a day first</div>';btn.disabled=true;btn.textContent='Select a time to continue';return;}
+    getAllSlots().forEach((s,idx)=>{const busy=isBusy(idx,selectedDay.getDay()),isSel=selectedSlot&&selectedSlot.h===s.h&&selectedSlot.m===s.m;
+      const el=document.createElement('button');el.className='slot-btn'+(busy?' busy':'')+(isSel?' selected':'');
+      el.textContent=busy?'—':formatSlot(s.h,s.m);el.disabled=busy;
+      if(!busy)el.onclick=()=>{selectedSlot=s;btn.disabled=false;btn.textContent=`Book ${formatSlot(s.h,s.m)} →`;renderSlots();};c.appendChild(el);});
+  }
+  function confirmBooking(){if(!selectedDay||!selectedSlot)return;const ds=selectedDay.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'});document.getElementById('bookedSlotDisplay').textContent=`📅 ${ds} at ${formatSlot(selectedSlot.h,selectedSlot.m)}`;document.getElementById('schedBooking').style.display='none';document.getElementById('schedConfirm').classList.add('show');}
+  function changeWeek(dir){if(schedWeekOffset+dir<0)return;schedWeekOffset+=dir;renderWeek();}
+  function openScheduler(){schedWeekOffset=0;selectedDay=null;selectedSlot=null;document.getElementById('schedBooking').style.display='block';document.getElementById('schedConfirm').classList.remove('show');document.getElementById('schedulerModal').classList.add('open');document.body.style.overflow='hidden';renderWeek();}
+  function closeScheduler(){document.getElementById('schedulerModal').classList.remove('open');document.body.style.overflow='';}
+  function openPocketListings(){document.getElementById('pocketForm').style.display='block';document.getElementById('pocketConfirm').classList.remove('show');document.getElementById('pocketModal').classList.add('open');document.body.style.overflow='hidden';}
+  function closePocketListings(){document.getElementById('pocketModal').classList.remove('open');document.body.style.overflow='';}
+  function submitPocket(e){
+    e.preventDefault();
+    const email=document.getElementById('pocketEmail').value,subject=document.getElementById('pocketSubject').value,message=document.getElementById('pocketMessage').value;
+    fetch('https://formspree.io/f/mrebndrq',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({_subject:'Pocket Listing Request: '+subject,email,subject,message})}).catch(()=>{});
+    document.getElementById('pocketForm').style.display='none';
+    document.getElementById('pocketConfirm').classList.add('show');
+  }
+  function openContactMe(){document.getElementById('contactMeModal').classList.add('open');document.body.style.overflow='hidden';}
+  function closeContactMe(){document.getElementById('contactMeModal').classList.remove('open');document.body.style.overflow='';}
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeScheduler();closePocketListings();closeContactMe();}});
+</script>
+</body>
+</html>
